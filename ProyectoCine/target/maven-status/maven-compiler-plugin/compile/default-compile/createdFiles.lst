@@ -1,0 +1,3 @@
+ProyectoCinePersistencia\db\domain\Categoria.class
+ProyectoCinePersistencia\db\domain\Venta.class
+DB\dbConnection.class

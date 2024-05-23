@@ -1,4 +1,4 @@
-package DB;
+package ProyectoCinePersistencia.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,7 +16,7 @@ public class dbConnection {
     Connection cx;
 
     public dbConnection() {
-
+        
     }
 
     public Connection conectar() throws SQLException {
@@ -42,6 +42,7 @@ public class dbConnection {
         }
     }
 
+    /*
     public static void main(String[] args) {
         dbConnection conexion = new dbConnection();
         try {
@@ -51,4 +52,6 @@ public class dbConnection {
             System.out.println("Error al conectar a la base de datos");
         }
     }
+    */
+    
 }

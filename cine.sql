@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 25-05-2024 a las 21:36:15
+-- Tiempo de generación: 25-05-2024 a las 21:54:08
 -- Versión del servidor: 8.0.31
 -- Versión de PHP: 8.0.26
 
@@ -116,6 +116,7 @@ CREATE TABLE IF NOT EXISTS `peliculas` (
   `Sinopsis` text NOT NULL,
   `FechaEstreno` text NOT NULL,
   `Duracion` int NOT NULL,
+  `IdCategoria` int NOT NULL,
   PRIMARY KEY (`idPelicula`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -123,13 +124,13 @@ CREATE TABLE IF NOT EXISTS `peliculas` (
 -- Volcado de datos para la tabla `peliculas`
 --
 
-INSERT INTO `peliculas` (`idPelicula`, `Titulo`, `Sinopsis`, `FechaEstreno`, `Duracion`) VALUES
-(1, 'La Gran Aventura', 'Un grupo de amigos emprende una épica travesía para salvar su hogar.', '2024-06-01', 120),
-(2, 'Risas y Lagrimas', 'Una comedia dramática sobre las complejidades de la vida familiar.', '2024-05-15', 90),
-(3, 'Misterios del Pasado', 'Un detective investiga un antiguo misterio en una pequeña ciudad.', '2024-05-22', 110),
-(4, 'Noche de Miedo', 'Un grupo de jóvenes lucha por sobrevivir en una noche llena de terror.', '2024-05-29', 100),
-(5, 'El Futuro es Hoy', 'Una visión futurista donde la tecnología domina cada aspecto de la vida.', '2024-06-05', 130),
-(6, 'Aventuras Animadas', 'Un divertido viaje animado lleno de risas y enseñanzas.', '2024-06-12', 85);
+INSERT INTO `peliculas` (`idPelicula`, `Titulo`, `Sinopsis`, `FechaEstreno`, `Duracion`, `IdCategoria`) VALUES
+(1, 'La Gran Aventura', 'Un grupo de amigos emprende una épica travesía para salvar su hogar.', '2024-06-01', 120, 1),
+(2, 'Risas y Lagrimas', 'Una comedia dramática sobre las complejidades de la vida familiar.', '2024-05-15', 90, 2),
+(3, 'Misterios del Pasado', 'Un detective investiga un antiguo misterio en una pequeña ciudad.', '2024-05-22', 110, 3),
+(4, 'Noche de Miedo', 'Un grupo de jóvenes lucha por sobrevivir en una noche llena de terror.', '2024-05-29', 100, 4),
+(5, 'El Futuro es Hoy', 'Una visión futurista donde la tecnología domina cada aspecto de la vida.', '2024-06-05', 130, 5),
+(6, 'Aventuras Animadas', 'Un divertido viaje animado lleno de risas y enseñanzas.', '2024-06-12', 85, 6);
 
 -- --------------------------------------------------------
 

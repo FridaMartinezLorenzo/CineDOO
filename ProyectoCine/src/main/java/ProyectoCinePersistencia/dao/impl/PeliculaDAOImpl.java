@@ -141,12 +141,12 @@ public class PeliculaDAOImpl implements PeliculaDAO {
     /*Codigo utilizado para probar la implementación de la clase PeliculaDAOImpl
     public static void main(String[] args) {
         PeliculaDAOImpl peliculaDAO = new PeliculaDAOImpl();
-        
+
         // Crear una nueva película
         Pelicula nuevaPelicula = new Pelicula(0, "Inception", "A mind-bending thriller", 148, "2010-07-16", 1);
         peliculaDAO.Crear(nuevaPelicula);
         System.out.println("Id de la nueva pelicula :" + nuevaPelicula.getIdPelicula());
-        
+
         // Buscar la película creada
         Pelicula peliculaObtenida = peliculaDAO.Buscar(2); // Cambia el ID según sea necesario
         if (peliculaObtenida != null) {
@@ -154,21 +154,21 @@ public class PeliculaDAOImpl implements PeliculaDAO {
         } else {
             System.out.println("No se encontro la pelicula con ID 1.");
         }
-        
+
         // Actualizar la película
         if (peliculaObtenida != null) {
             peliculaObtenida.setSinopsis("A thriller that bends the mind");
             peliculaDAO.Actualizar(peliculaObtenida);
             System.out.println("\n\nSinopsis de Pelicula Actualizada:" + peliculaObtenida.getSinopsis());
         }
-        
+
         // Buscar todas las películas
         List<Pelicula> todasPeliculas = peliculaDAO.Listar();
         System.out.println("\n\nTodas las peliculas:");
         for (Pelicula pelicula : todasPeliculas) {
             System.out.println(pelicula.getTitulo());
         }
-        
+
         // Eliminar la película
         peliculaDAO.Eliminar(20); // Cambia el ID según sea necesario
     }

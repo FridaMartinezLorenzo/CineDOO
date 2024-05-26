@@ -223,6 +223,7 @@ public class VentaDAOImpl implements VentaDAO {
         return ventas;
     }
 
+    /*
     public static void main(String[] args) {
         VentaDAOImpl ventaDAO = new VentaDAOImpl();
 
@@ -259,4 +260,5 @@ public class VentaDAOImpl implements VentaDAO {
         ventaDAO.Eliminar(nuevaVenta);
         System.out.println("Venta eliminada con ID: " + nuevaVenta.getIdVenta());
     }
+     */
 }

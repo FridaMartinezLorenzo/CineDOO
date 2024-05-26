@@ -15,9 +15,9 @@ public class Venta {
     private Date Fecha;
     
     //Constructor
-    public Venta(){
-        IdVenta = 0;
-        NoBoletos = 0;
+    public Venta(int idVenta, int noBoletos){
+        IdVenta = idVenta;
+        NoBoletos = noBoletos;
         Fecha = new Date();//Obtenemos fecha actual
     }
     

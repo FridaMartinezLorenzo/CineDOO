@@ -12,7 +12,7 @@ import java.util.List;
  * @author frida
  */
 public interface PeliculaDAO {
-    void Crear(Pelicula pelicula);
+    Pelicula Crear(Pelicula pelicula);
     Pelicula Obtener(int id);
     void Actualizar(Pelicula pelicula);
     void Eliminar (int id);

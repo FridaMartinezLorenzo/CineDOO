@@ -1,3 +1,6 @@
-C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\db\domain\Categoria.java
-C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\db\domain\Venta.java
-C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\DB\dbConnection.java
+C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\utils\dbConnection.java
+C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\dao\impl\PeliculaDAOImpl.java
+C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\entities\Categoria.java
+C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\dao\PeliculaDAO.java
+C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\entities\Pelicula.java
+C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\entities\Venta.java

@@ -6,8 +6,8 @@ import ProyectoCinePersistencia.entities.Horario;
 
 public interface HorarioDAO {
     Horario Crear(Horario horario);
-    Horario Obtener(int id);
+    Horario Buscar(int id);
     void Actualizar(Horario horario);
     void Eliminar(int id);
-    List<Horario> ObtenerTodos();
+    List<Horario> Listar();
 }

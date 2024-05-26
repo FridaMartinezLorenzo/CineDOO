@@ -10,9 +10,9 @@ import ProyectoCinePersistencia.entities.Pelicula;
         
 public interface PeliculaDAO {
     Pelicula Crear(Pelicula pelicula);
-    Pelicula Obtener(int id);
+    Pelicula Buscar(int id);
     void Actualizar(Pelicula pelicula);
     void Eliminar (int id);
-    List<Pelicula> ObtenerTodas();
+    List<Pelicula> Listar();
     
 }

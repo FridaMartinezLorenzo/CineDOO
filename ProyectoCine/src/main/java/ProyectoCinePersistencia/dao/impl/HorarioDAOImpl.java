@@ -42,7 +42,7 @@ public class HorarioDAOImpl implements HorarioDAO {
     }
 
     @Override
-    public Horario Obtener(int id) {
+    public Horario Buscar(int id) {
         String query = "SELECT * FROM horarios WHERE IdHorario = ?";
         Horario horario = null;
         Connection connection = null;
@@ -67,7 +67,7 @@ public class HorarioDAOImpl implements HorarioDAO {
     @Override
     public void Actualizar(Horario horario) {
         // Verificar si el horario existe antes de intentar actualizarlo
-        Horario horarioExistente = Obtener(horario.getIdHorario());
+        Horario horarioExistente = Buscar(horario.getIdHorario());
         if (horarioExistente == null) {
             System.out.println("El horario con ID " + horario.getIdHorario() + " no existe en la base de datos.");
             return; // Salir del método si el horario no existe
@@ -102,7 +102,7 @@ public class HorarioDAOImpl implements HorarioDAO {
     }
 
     @Override
-    public List<Horario> ObtenerTodos() {
+    public List<Horario> Listar() {
         String query = "SELECT * FROM horarios";
         List<Horario> horarios = new ArrayList<>();
         Connection connection = null;
@@ -132,20 +132,20 @@ public class HorarioDAOImpl implements HorarioDAO {
         Horario horarioCreado = horarioDAO.Crear(nuevoHorario);
         System.out.println("Horario creado: ID = " + horarioCreado.getIdHorario() + ", HoraInicio = " + horarioCreado.getHoraInicio());
 
-        // Obtener el horario creado
-        Horario horarioObtenido = horarioDAO.Obtener(horarioCreado.getIdHorario());
+        // Buscar el horario creado
+        Horario horarioObtenido = horarioDAO.Buscar(horarioCreado.getIdHorario());
         System.out.println("Horario obtenido: ID = " + horarioObtenido.getIdHorario() + ", HoraInicio = " + horarioObtenido.getHoraInicio());
 
         // Actualizar el horario
         if (horarioObtenido != null) {
             horarioObtenido.setHoraInicio("12:00:00");
             horarioDAO.Actualizar(horarioObtenido);
-            Horario horarioActualizado = horarioDAO.Obtener(horarioObtenido.getIdHorario());
+            Horario horarioActualizado = horarioDAO.Buscar(horarioObtenido.getIdHorario());
             System.out.println("Horario actualizado: ID = " + horarioActualizado.getIdHorario() + ", HoraInicio = " + horarioActualizado.getHoraInicio());
         }
 
-        // Obtener todos los horarios
-        List<Horario> todosHorarios = horarioDAO.ObtenerTodos();
+        // Buscar todos los horarios
+        List<Horario> todosHorarios = horarioDAO.Listar();
         System.out.println("Todos los horarios:");
         for (Horario horario : todosHorarios) {
             System.out.println("ID = " + horario.getIdHorario() + ", HoraInicio = " + horario.getHoraInicio());
@@ -156,10 +156,10 @@ public class HorarioDAOImpl implements HorarioDAO {
         System.out.println("Horario con ID " + horarioCreado.getIdHorario() + " eliminado.");
 
         // Verificar que el horario ha sido eliminado
-        Horario horarioEliminado = horarioDAO.Obtener(horarioCreado.getIdHorario());
+        Horario horarioEliminado = horarioDAO.Buscar(horarioCreado.getIdHorario());
         if (horarioEliminado == null) {
             System.out.println("El horario con ID " + horarioCreado.getIdHorario() + " no existe en la base de datos.");
         }
     }
-    */
+     */
 }

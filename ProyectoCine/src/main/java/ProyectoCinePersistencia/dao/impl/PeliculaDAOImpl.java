@@ -12,6 +12,7 @@ import ProyectoCinePersistencia.entities.Pelicula;
 import ProyectoCinePersistencia.utils.dbConnection;
 
 public class PeliculaDAOImpl implements PeliculaDAO {
+
     private dbConnection dbConnection;
 
     public PeliculaDAOImpl() {
@@ -45,7 +46,7 @@ public class PeliculaDAOImpl implements PeliculaDAO {
     }
 
     @Override
-    public Pelicula Obtener(int id) {
+    public Pelicula Buscar(int id) {
         String query = "SELECT * FROM peliculas WHERE IdPelicula = ?";
         Pelicula pelicula = null;
         Connection connection = null;
@@ -74,15 +75,14 @@ public class PeliculaDAOImpl implements PeliculaDAO {
     @Override
     public void Actualizar(Pelicula pelicula) {
         // Verificar si la película existe antes de intentar actualizarla
-        Pelicula peliculaExistente = Obtener(pelicula.getIdPelicula());
+        Pelicula peliculaExistente = Buscar(pelicula.getIdPelicula());
         if (peliculaExistente == null) {
             System.out.println("La película con ID " + pelicula.getIdPelicula() + " no existe en la base de datos.");
             return; // Salir del método si la película no existe
         }
 
         String query = "UPDATE peliculas SET Titulo = ?, Sinopsis = ?, Duracion = ?, FechaEstreno = ?, IdCategoria = ? WHERE IdPelicula = ?";
-        try (Connection connection = dbConnection.conectar();
-                PreparedStatement statement = connection.prepareStatement(query)) {
+        try (Connection connection = dbConnection.conectar(); PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, pelicula.getTitulo());
             statement.setString(2, pelicula.getSinopsis());
             statement.setInt(3, pelicula.getDuracion());
@@ -112,7 +112,7 @@ public class PeliculaDAOImpl implements PeliculaDAO {
     }
 
     @Override
-    public List<Pelicula> ObtenerTodas() {
+    public List<Pelicula> Listar() {
         String query = "SELECT * FROM peliculas";
         List<Pelicula> peliculas = new ArrayList<>();
         Connection connection = null;
@@ -147,8 +147,8 @@ public class PeliculaDAOImpl implements PeliculaDAO {
         peliculaDAO.Crear(nuevaPelicula);
         System.out.println("Id de la nueva pelicula :" + nuevaPelicula.getIdPelicula());
         
-        // Obtener la película creada
-        Pelicula peliculaObtenida = peliculaDAO.Obtener(2); // Cambia el ID según sea necesario
+        // Buscar la película creada
+        Pelicula peliculaObtenida = peliculaDAO.Buscar(2); // Cambia el ID según sea necesario
         if (peliculaObtenida != null) {
             System.out.println("\n\nPelicula obtenida: " + peliculaObtenida.getTitulo());
         } else {
@@ -162,8 +162,8 @@ public class PeliculaDAOImpl implements PeliculaDAO {
             System.out.println("\n\nSinopsis de Pelicula Actualizada:" + peliculaObtenida.getSinopsis());
         }
         
-        // Obtener todas las películas
-        List<Pelicula> todasPeliculas = peliculaDAO.ObtenerTodas();
+        // Buscar todas las películas
+        List<Pelicula> todasPeliculas = peliculaDAO.Listar();
         System.out.println("\n\nTodas las peliculas:");
         for (Pelicula pelicula : todasPeliculas) {
             System.out.println(pelicula.getTitulo());
@@ -172,5 +172,5 @@ public class PeliculaDAOImpl implements PeliculaDAO {
         // Eliminar la película
         peliculaDAO.Eliminar(20); // Cambia el ID según sea necesario
     }
-    */
+     */
 }

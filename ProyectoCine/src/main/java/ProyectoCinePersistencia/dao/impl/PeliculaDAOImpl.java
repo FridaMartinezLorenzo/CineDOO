@@ -4,38 +4,38 @@
  */
 package ProyectoCinePersistencia.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 
 import ProyectoCinePersistencia.dao.PeliculaDAO;
 import ProyectoCinePersistencia.entities.Pelicula;
 import ProyectoCinePersistencia.utils.dbConnection;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+
 /**
  *
  * @author frida
  */
-public class PeliculaDAOImpl implements PeliculaDAO{
+public class PeliculaDAOImpl implements PeliculaDAO {
+
     private dbConnection conexion;
-    
-    public PeliculaDAOImpl(){
+
+    public PeliculaDAOImpl() {
         this.conexion = new dbConnection();
     }
-    
-    @Override
-    public void Crear(Pelicula pelicula){
-        
-    }
-    
-    @Override
-    public List<Pelicula> ObtenerTodas()
-    {
-        List <Pelicula> peliculas = new ArrayList<>();
-        return peliculas;
-    }    
 
     @Override
-    public Pelicula Obtener(int id) {
+    public void Crear(Pelicula pelicula) {
+
+    }
+
+    @Override
+    public List<Pelicula> Listar() {
+        List<Pelicula> peliculas = new ArrayList<>();
+        return peliculas;
+    }
+
+    @Override
+    public Pelicula Buscar(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -48,5 +48,5 @@ public class PeliculaDAOImpl implements PeliculaDAO{
     public void Eliminar(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

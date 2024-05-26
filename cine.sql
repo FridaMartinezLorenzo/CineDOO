@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 26-05-2024 a las 05:37:25
+-- Tiempo de generación: 26-05-2024 a las 05:39:53
 -- Versión del servidor: 8.0.31
 -- Versión de PHP: 8.0.26
 
@@ -235,16 +235,16 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `Nombre` text NOT NULL,
   `Correo` text NOT NULL,
   `Contrasena` text NOT NULL,
-  `idRol` int NOT NULL,
+  `IdRol` int NOT NULL,
   PRIMARY KEY (`IdUsuario`),
-  KEY `idRol` (`idRol`)
+  KEY `idRol` (`IdRol`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`IdUsuario`, `Nombre`, `Correo`, `Contrasena`, `idRol`) VALUES
+INSERT INTO `usuarios` (`IdUsuario`, `Nombre`, `Correo`, `Contrasena`, `IdRol`) VALUES
 (1, 'Admin', 'admin@cine.com', 'admin123', 1),
 (2, 'Juan Perez', 'juan.perez@correo.com', 'juan123', 2),
 (3, 'Maria Garcia', 'maria.garcia@correo.com', 'maria123', 3),

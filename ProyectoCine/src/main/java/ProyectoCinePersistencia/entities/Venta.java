@@ -11,20 +11,24 @@ package ProyectoCinePersistencia.entities;
 public class Venta {
 
     private int IdVenta;
+    private int IdUsuario;
     private String NombreUsuario;
     private int IdFuncion;
     private String TituloPelicula;
     private String HoraInicio;
     private float Total;
+    private int CantBoletos;
 
     //Constructor con parametros
-    public Venta(int IdVenta, String NombreUsuario, int IdFuncion, String TituloPelicula, String HoraInicio, float Total) {
+    public Venta(int IdVenta, int IdUsuario, String NombreUsuario, int IdFuncion, String TituloPelicula, String HoraInicio, float Total, int cantBoletos) {
         this.IdVenta = IdVenta;
+        this.IdUsuario = IdUsuario;
         this.NombreUsuario = NombreUsuario;
         this.IdFuncion = IdFuncion;
         this.TituloPelicula = TituloPelicula;
         this.HoraInicio = HoraInicio;
         this.Total = Total;
+        this.CantBoletos = cantBoletos;
     }
 
     //Constructor vacio
@@ -44,6 +48,14 @@ public class Venta {
 
     public void setIdVenta(int IdVenta) {
         this.IdVenta = IdVenta;
+    }
+
+    public int getIdUsuario() {
+        return this.IdUsuario;
+    }
+
+    public void setIdUsuario(int IdUsuario) {
+        this.IdUsuario = IdUsuario;
     }
 
     public String getNombreUsuario() {
@@ -84,5 +96,13 @@ public class Venta {
 
     public void setTotal(float Total) {
         this.Total = Total;
+    }
+
+    public int getCantBoletos() {
+        return this.CantBoletos;
+    }
+
+    public void setCantBoletos(int CantBoletos) {
+        this.CantBoletos = CantBoletos;
     }
 }

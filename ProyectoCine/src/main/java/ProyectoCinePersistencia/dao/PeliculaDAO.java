@@ -4,13 +4,10 @@
  */
 package ProyectoCinePersistencia.dao;
 
-import ProyectoCinePersistencia.entities.Pelicula;
 import java.util.List;
+
+import ProyectoCinePersistencia.entities.Pelicula;
         
-/**
- *
- * @author frida
- */
 public interface PeliculaDAO {
     Pelicula Crear(Pelicula pelicula);
     Pelicula Obtener(int id);

@@ -1,10 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ProyectoCinePersistencia.dao;
 
+import java.util.List;
 
-public class HorarioDAO {
-    
+import ProyectoCinePersistencia.entities.Horario;
+
+public interface HorarioDAO {
+    Horario Crear(Horario horario);
+    Horario Obtener(int id);
+    void Actualizar(Horario horario);
+    void Eliminar(int id);
+    List<Horario> ObtenerTodos();
 }

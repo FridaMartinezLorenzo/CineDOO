@@ -1,3 +1,4 @@
-ProyectoCinePersistencia\db\domain\Categoria.class
-ProyectoCinePersistencia\db\domain\Venta.class
-DB\dbConnection.class
+ProyectoCinePersistencia\entities\Rol.class
+ProyectoCinePersistencia\entities\Categoria.class
+ProyectoCinePersistencia\dao\impl\RolesDAOImpl.class
+ProyectoCinePersistencia\dao\RolesDAO.class

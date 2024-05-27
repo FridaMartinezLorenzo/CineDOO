@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ProyectoCinePersistencia.dao.CategoriaDAO;
 import ProyectoCinePersistencia.entities.Categoria;
 import ProyectoCinePersistencia.utils.dbConnection;
 
@@ -181,13 +180,13 @@ public class CategoriaDAOImpl implements CategoriaDAO {
     /*
     public static void main(String[] args) {
         CategoriaDAOImpl categoriaDAO = new CategoriaDAOImpl();
-
+        
         // Crear una nueva categoría
         Categoria nuevaCategoria = new Categoria();
         nuevaCategoria.setNombre("Acción");
         Categoria categoriaCreada = categoriaDAO.Crear(nuevaCategoria);
         System.out.println("Categoría creada: ID = " + categoriaCreada.getCategoria() + ", Nombre = " + categoriaCreada.getNombre());
-
+        
         // Buscar la categoría creada
         Categoria categoriaObtenida = categoriaDAO.Buscar(categoriaCreada.getCategoria());
         System.out.println("Categoría obtenida: ID = " + categoriaObtenida.getCategoria() + ", Nombre = " + categoriaObtenida.getNombre());

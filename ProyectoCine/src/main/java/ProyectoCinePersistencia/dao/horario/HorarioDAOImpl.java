@@ -1,4 +1,4 @@
-package ProyectoCinePersistencia.dao.impl;
+package ProyectoCinePersistencia.dao.horario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ProyectoCinePersistencia.dao.HorarioDAO;
 import ProyectoCinePersistencia.entities.Horario;
 import ProyectoCinePersistencia.utils.dbConnection;
 
@@ -123,10 +122,11 @@ public class HorarioDAOImpl implements HorarioDAO {
         }
         return horarios;
     }
+
     /*Codigo para probar las consultas 
     public static void main(String[] args) {
         HorarioDAOImpl horarioDAO = new HorarioDAOImpl();
-
+        
         // Crear un nuevo horario
         Horario nuevoHorario = new Horario(0, "10:00:00");
         Horario horarioCreado = horarioDAO.Crear(nuevoHorario);
@@ -150,7 +150,7 @@ public class HorarioDAOImpl implements HorarioDAO {
         for (Horario horario : todosHorarios) {
             System.out.println("ID = " + horario.getIdHorario() + ", HoraInicio = " + horario.getHoraInicio());
         }
-
+        
         // Eliminar el horario
         horarioDAO.Eliminar(horarioCreado.getIdHorario());
         System.out.println("Horario con ID " + horarioCreado.getIdHorario() + " eliminado.");

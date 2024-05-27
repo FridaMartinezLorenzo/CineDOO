@@ -1,4 +1,4 @@
-package ProyectoCinePersistencia.dao;
+package ProyectoCinePersistencia.dao.categoria;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package ProyectoCinePersistencia.dao.impl;
+package ProyectoCinePersistencia.dao.venta;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ProyectoCinePersistencia.dao.VentaDAO;
 import ProyectoCinePersistencia.entities.Venta;
 import ProyectoCinePersistencia.utils.dbConnection;
 
@@ -222,11 +221,11 @@ public class VentaDAOImpl implements VentaDAO {
         }
         return ventas;
     }
-
+    
     /*
     public static void main(String[] args) {
         VentaDAOImpl ventaDAO = new VentaDAOImpl();
-
+        
         // Crear una nueva venta
         Venta nuevaVenta = new Venta();
         nuevaVenta.setIdUsuario(3); // IdUsuario de "Maria Garcia"
@@ -243,19 +242,19 @@ public class VentaDAOImpl implements VentaDAO {
         } else {
             System.out.println("Venta no encontrada.");
         }
-
+        
         // Actualizar la venta
         ventaEncontrada.setTotal(200.00f);
         ventaDAO.Actualizar(ventaEncontrada);
         System.out.println("Venta actualizada: " + ventaEncontrada.getIdVenta() + ", Nuevo Total: " + ventaEncontrada.getTotal());
-
+        
         // Listar todas las ventas
         List<Venta> listaVentas = ventaDAO.Listar();
         System.out.println("Lista de Ventas:");
         for (Venta venta : listaVentas) {
             System.out.println("ID: " + venta.getIdVenta() + ", Usuario: " + venta.getNombreUsuario() + ", Pelicula: " + venta.getTituloPelicula() + ", Hora: " + venta.getHoraInicio() + ", Total: " + venta.getTotal() + ", Boletos: " + venta.getCantBoletos());
         }
-
+        
         // Eliminar una venta
         ventaDAO.Eliminar(nuevaVenta);
         System.out.println("Venta eliminada con ID: " + nuevaVenta.getIdVenta());

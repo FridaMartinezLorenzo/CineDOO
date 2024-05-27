@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 26-05-2024 a las 05:39:53
+-- Tiempo de generación: 27-05-2024 a las 19:30:35
 -- Versión del servidor: 8.0.31
 -- Versión de PHP: 8.0.26
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `IdCategoria` int NOT NULL AUTO_INCREMENT,
   `Nombre` text NOT NULL,
   PRIMARY KEY (`IdCategoria`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `categorias`
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `horarios` (
   `IdHorario` int NOT NULL AUTO_INCREMENT,
   `HoraInicio` text NOT NULL,
   PRIMARY KEY (`IdHorario`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `horarios`
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `peliculas` (
   `Duracion` int NOT NULL,
   `IdCategoria` int NOT NULL,
   PRIMARY KEY (`IdPelicula`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `peliculas`
@@ -130,9 +130,8 @@ INSERT INTO `peliculas` (`IdPelicula`, `Titulo`, `Sinopsis`, `FechaEstreno`, `Du
 (4, 'Noche de Miedo', 'Un grupo de jóvenes lucha por sobrevivir en una noche llena de terror.', '2024-05-29', 100, 4),
 (5, 'El Futuro es Hoy', 'Una visión futurista donde la tecnología domina cada aspecto de la vida.', '2024-06-05', 130, 5),
 (6, 'Aventuras Animadas', 'Un divertido viaje animado lleno de risas y enseñanzas.', '2024-06-12', 85, 6),
-(21, 'Inception', 'A mind-bending thriller', '2010-07-16', 148, 1),
-(22, 'Inception', 'A mind-bending thriller', '2010-07-16', 148, 1),
-(23, 'Inception', 'A mind-bending thriller', '2010-07-16', 148, 1);
+(1, 'La Gran Aventura', 'Un grupo de amigos emprende una épica travesía para salvar su hogar.', '2024-06-01', 120, 0),
+(67, 'Inception', 'A mind-bending thriller', '2010-07-16', 148, 1);
 
 -- --------------------------------------------------------
 
@@ -267,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `ventas` (
   PRIMARY KEY (`IdVenta`),
   KEY `IdUsuario` (`IdUsuario`),
   KEY `IdFuncion` (`IdFuncion`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `ventas`
@@ -282,8 +281,8 @@ INSERT INTO `ventas` (`IdVenta`, `IdUsuario`, `IdFuncion`, `Total`, `CantBoletos
 (6, 5, 6, 600, 6),
 (7, 3, 7, 150, 1),
 (8, 4, 8, 300, 2),
-(9, 5, 9, 450, 3),
-(10, 3, 10, 600, 4);
+(9, 5, 8, 450, 3),
+(10, 3, 6, 600, 4);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

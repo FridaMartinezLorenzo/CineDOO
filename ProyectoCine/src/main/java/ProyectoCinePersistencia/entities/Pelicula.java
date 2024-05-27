@@ -1,6 +1,7 @@
 package ProyectoCinePersistencia.entities;
 
 public class Pelicula {
+
     // Atributos
     private int IdPelicula;
     private String Titulo;
@@ -70,5 +71,17 @@ public class Pelicula {
 
     public void setIdCategoria(int IdCategoria) {
         this.IdCategoria = IdCategoria;
+    }
+
+    @Override
+    public String toString() {
+        return "Pelicula{"
+                + "idPelicula=" + this.IdPelicula
+                + ", titulo='" + this.Titulo + '\''
+                + ", sinopsis='" + this.Sinopsis + '\''
+                + ", duracion=" + this.Duracion
+                + ", fechaEstreno='" + this.fechaEstreno + '\''
+                + ", idCategoria=" + this.IdCategoria
+                + '}';
     }
 }

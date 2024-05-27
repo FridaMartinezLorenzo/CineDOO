@@ -1,4 +1,4 @@
-package ProyectoCinePersistencia.dao;
+package ProyectoCinePersistencia.dao.horario;
 
 import java.util.List;
 

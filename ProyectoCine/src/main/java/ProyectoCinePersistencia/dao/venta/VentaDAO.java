@@ -1,6 +1,6 @@
-package ProyectoCinePersistencia.dao;
+package ProyectoCinePersistencia.dao.venta;
 
-import java.util.List;
+import java.util.List; 
 
 import ProyectoCinePersistencia.entities.Venta;
 
@@ -10,5 +10,4 @@ public interface VentaDAO {
     public void Eliminar(Venta venta);
     public Venta Buscar(int IdVenta);
     public List<Venta> Listar();
-
 }

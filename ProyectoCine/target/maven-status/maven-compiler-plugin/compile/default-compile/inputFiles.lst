@@ -1,8 +1,10 @@
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\utils\dbConnection.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\dao\CategoriaDAO.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\dao\impl\VentaDAOImpl.java
+C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\dao\pelicula\PeliculaDAO.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\dao\HorarioDAO.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\dao\VentaDAO.java
+C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\dao\pelicula\PeliculaDAOImpl.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\entities\Pelicula.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\dao\impl\CategoriaDAOImpl.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\dao\impl\HorarioDAOImpl.java

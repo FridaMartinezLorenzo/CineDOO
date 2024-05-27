@@ -1,4 +1,4 @@
-package ProyectoCinePersistencia.dao.impl;
+package ProyectoCinePersistencia.dao.pelicula;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ProyectoCinePersistencia.dao.PeliculaDAO;
 import ProyectoCinePersistencia.entities.Pelicula;
 import ProyectoCinePersistencia.utils.dbConnection;
 
@@ -138,6 +137,7 @@ public class PeliculaDAOImpl implements PeliculaDAO {
         return peliculas;
     }
 
+    /*Codigo utilizado para probar la implementación de la clase PeliculaDAOImpl
     public static void main(String[] args) {
         PeliculaDAOImpl peliculaDAO = new PeliculaDAOImpl();
 
@@ -169,7 +169,7 @@ public class PeliculaDAOImpl implements PeliculaDAO {
         }
 
         // Eliminar la película
-        peliculaDAO.Eliminar(20); // Cambia el ID según sea necesario
+        peliculaDAO.Eliminar(61); // Cambia el ID según sea necesario
     }
-     
+     */
 }

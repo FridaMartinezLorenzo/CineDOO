@@ -11,7 +11,7 @@ import ProyectoCinePersistencia.entities.Usuario;
 import ProyectoCinePersistencia.dao.UsuariosDAO;
 import ProyectoCinePersistencia.utils.dbConnection;
 
-public class UsuariosDAOImpl {
+public class UsuariosDAOImpl implements UsuariosDAO {
     
     private dbConnection conexion;
 

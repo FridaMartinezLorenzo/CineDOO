@@ -2,6 +2,7 @@ package ProyectoCinePersistencia.dao.pelicula;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -11,15 +12,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ProyectoCinePersistencia.entities.Pelicula;
+import ProyectoCinePersistencia.utils.MyBatisUtil;
 
 public class PeliculaTest {
 
     private PeliculaDAOImpl peliculaDAO;
     private Pelicula pelicula;
+    private SqlSessionFactory sqlSessionFactory;
 
     @Before
     public void setUp() throws Exception {
-        peliculaDAO = new PeliculaDAOImpl();
+        sqlSessionFactory = MyBatisUtil.getSqlSessionFactory();
+        peliculaDAO = new PeliculaDAOImpl(sqlSessionFactory);
         pelicula = new Pelicula();
         pelicula.setTitulo("Test Pelicula");
         pelicula.setSinopsis("Test Sinopsis");

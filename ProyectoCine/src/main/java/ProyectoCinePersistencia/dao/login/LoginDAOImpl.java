@@ -1,11 +1,10 @@
-package ProyectoCinePersistencia.dao.impl;
+package ProyectoCinePersistencia.dao.login;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import ProyectoCinePersistencia.dao.LoginDAO;
 import ProyectoCinePersistencia.utils.dbConnection;
 import ProyectoCinePersistencia.entities.Usuario;
 

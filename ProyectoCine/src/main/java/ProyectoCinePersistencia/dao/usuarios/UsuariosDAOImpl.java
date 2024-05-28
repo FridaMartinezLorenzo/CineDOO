@@ -1,4 +1,4 @@
-package ProyectoCinePersistencia.dao.impl;
+package ProyectoCinePersistencia.dao.usuarios;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ProyectoCinePersistencia.entities.Usuario;
-import ProyectoCinePersistencia.dao.UsuariosDAO;
 import ProyectoCinePersistencia.utils.dbConnection;
 
 public class UsuariosDAOImpl implements UsuariosDAO {

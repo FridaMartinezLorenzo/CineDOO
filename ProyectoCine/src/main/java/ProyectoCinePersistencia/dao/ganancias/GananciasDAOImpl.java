@@ -1,4 +1,4 @@
-package ProyectoCinePersistencia.dao.impl;
+package ProyectoCinePersistencia.dao.ganancias;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ProyectoCinePersistencia.utils.dbConnection;
-import ProyectoCinePersistencia.dao.GananciasDAO;
 
 public class GananciasDAOImpl implements GananciasDAO{
 
@@ -39,6 +38,6 @@ public class GananciasDAOImpl implements GananciasDAO{
 
     public static void main(String[] args) {
         GananciasDAOImpl ganancias = new GananciasDAOImpl();
-        System.out.println("Ganancias de la pelicula con id " + 1 +":" +ganancias.obtenerGanancias(1));
+        System.out.println("Ganancias de la pelicula con id " + 1 +": " +ganancias.obtenerGanancias(1));
     }
 }

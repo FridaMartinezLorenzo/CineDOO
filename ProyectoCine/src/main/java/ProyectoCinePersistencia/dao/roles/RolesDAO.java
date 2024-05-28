@@ -1,5 +1,5 @@
 
-package ProyectoCinePersistencia.dao;
+package ProyectoCinePersistencia.dao.roles;
 
 import ProyectoCinePersistencia.entities.Rol;
 import java.util.List;

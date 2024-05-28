@@ -1,4 +1,4 @@
-package ProyectoCinePersistencia.dao;
+package ProyectoCinePersistencia.dao.usuarios;
 
 
 import ProyectoCinePersistencia.entities.Usuario;

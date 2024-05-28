@@ -1,5 +1,5 @@
 
-package ProyectoCinePersistencia.dao.impl;
+package ProyectoCinePersistencia.dao.roles;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ProyectoCinePersistencia.dao.RolesDAO;
 import ProyectoCinePersistencia.entities.Rol;
 import ProyectoCinePersistencia.utils.dbConnection;
 

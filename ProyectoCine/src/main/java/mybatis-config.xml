@@ -21,5 +21,8 @@
 
     <mappers>
         <mapper resource="ProyectoCinePersistencia/db/mappers/PeliculaMapper.xml"/>
+        <mapper resource="ProyectoCinePersistencia/db/mappers/CategoriaMapper.xml"/>
+        <mapper resource="ProyectoCinePersistencia/db/mappers/HorarioMapper.xml"/>
+        <mapper resource="ProyectoCinePersistencia/db/mappers/VentaMapper.xml"/>
     </mappers>
 </configuration>

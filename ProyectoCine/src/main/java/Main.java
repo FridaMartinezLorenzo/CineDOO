@@ -1,53 +1,45 @@
+import ProyectoCinePersistencia.dao.venta.VentaDAOImpl;
+import ProyectoCinePersistencia.entities.Venta;
 
 import java.util.List;
-
-import org.apache.ibatis.session.SqlSessionFactory;
-
-import ProyectoCinePersistencia.dao.pelicula.PeliculaDAO;
-import ProyectoCinePersistencia.dao.pelicula.PeliculaDAOImpl;
-import ProyectoCinePersistencia.entities.Pelicula;
-import ProyectoCinePersistencia.utils.MyBatisUtil;
 
 public class Main {
 
     public static void main(String[] args) {
-        // Obtén una instancia de SqlSessionFactory
-        SqlSessionFactory sqlSessionFactory = MyBatisUtil.getSqlSessionFactory();
+        // Crear instancia de VentaDAO
+        VentaDAOImpl ventaDAO = new VentaDAOImpl();
 
-        // Pasa la instancia de SqlSessionFactory al constructor de PeliculaDAOImpl
-        PeliculaDAO peliculaDAO = new PeliculaDAOImpl(sqlSessionFactory);
+        // Crear una nueva venta
+        Venta nuevaVenta = new Venta();
+        nuevaVenta.setIdUsuario(3); // IdUsuario de "Maria Garcia"
+        nuevaVenta.setIdFuncion(1); // IdFuncion para la función 1
+        nuevaVenta.setTotal(150.00f);
+        nuevaVenta.setCantBoletos(2);
+        ventaDAO.Crear(nuevaVenta);
+        System.out.println("Venta creada con ID: " + nuevaVenta.getIdVenta());
 
-        // Crear una nueva película
-        Pelicula nuevaPelicula = new Pelicula();
-        nuevaPelicula.setTitulo("Inception");
-        nuevaPelicula.setSinopsis("A mind-bending thriller");
-        nuevaPelicula.setDuracion(148);
-        nuevaPelicula.setFechaEstreno("2010-07-16");
-        nuevaPelicula.setIdCategoria(1);
-
-        // Insertar la película y obtener el objeto Pelicula que contiene el ID generado
-        Pelicula peliculaCreada = peliculaDAO.Crear(nuevaPelicula);
-        int idPeliculaCreada = peliculaCreada.getIdPelicula();
-        System.out.println("Película creada con ID: " + idPeliculaCreada);
-
-        // Buscar la película creada
-        Pelicula peliculaEncontrada = peliculaDAO.Buscar(idPeliculaCreada);
-        System.out.println("Película encontrada: " + peliculaEncontrada.getTitulo());
-
-        // Actualizar la película
-        peliculaEncontrada.setSinopsis("An updated synopsis");
-        peliculaDAO.Actualizar(peliculaEncontrada);
-        Pelicula peliculaActualizada = peliculaDAO.Buscar(idPeliculaCreada);
-        System.out.println("Película actualizada: " + peliculaActualizada.getSinopsis());
-
-        // Listar todas las películas
-        List<Pelicula> peliculas = peliculaDAO.Listar();
-        for (Pelicula p : peliculas) {
-            System.out.println("Película: " + p.getTitulo());
+        // Buscar una venta por su ID
+        Venta ventaEncontrada = ventaDAO.Buscar(nuevaVenta.getIdVenta());
+        if (ventaEncontrada != null) {
+            System.out.println("Venta encontrada: " + ventaEncontrada.getIdVenta() + ", Usuario: " + ventaEncontrada.getNombreUsuario());
+        } else {
+            System.out.println("Venta no encontrada.");
         }
 
-        // Eliminar la película
-        peliculaDAO.Eliminar(idPeliculaCreada);
-        System.out.println("Película eliminada");
+        // Actualizar la venta
+        ventaEncontrada.setTotal(200.00f);
+        ventaDAO.Actualizar(ventaEncontrada);
+        System.out.println("Venta actualizada: " + ventaEncontrada.getIdVenta() + ", Nuevo Total: " + ventaEncontrada.getTotal());
+
+        // Listar todas las ventas
+        List<Venta> listaVentas = ventaDAO.Listar();
+        System.out.println("Lista de Ventas:");
+        for (Venta venta : listaVentas) {
+            System.out.println("ID: " + venta.getIdVenta() + ", Usuario: " + venta.getNombreUsuario() + ", Pelicula: " + venta.getTituloPelicula() + ", Hora: " + venta.getHoraInicio() + ", Total: " + venta.getTotal() + ", Boletos: " + venta.getCantBoletos());
+        }
+
+        // Eliminar una venta
+        ventaDAO.Eliminar(nuevaVenta);
+        System.out.println("Venta eliminada con ID: " + nuevaVenta.getIdVenta());
     }
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProyectoCinePersistencia.db.mappers.HorarioMapper">
+    
+    <resultMap id="horarioResultMap" type="ProyectoCinePersistencia.entities.Horario">
+        <id property="idHorario" column="IdHorario"/>
+        <result property="horaInicio" column="HoraInicio"/>
+    </resultMap>
+
+    <insert id="insertarHorario" parameterType="ProyectoCinePersistencia.entities.Horario" useGeneratedKeys="true" keyProperty="idHorario">
+        INSERT INTO horarios (HoraInicio)
+        VALUES (#{horaInicio})
+    </insert>
+
+    <select id="buscarHorario" parameterType="int" resultType="ProyectoCinePersistencia.entities.Horario">
+        SELECT * FROM horarios WHERE IdHorario = #{id}
+    </select>
+
+    <update id="actualizarHorario" parameterType="ProyectoCinePersistencia.entities.Horario">
+        UPDATE horarios SET HoraInicio = #{horaInicio}
+        WHERE IdHorario = #{idHorario}
+    </update>
+
+    <delete id="eliminarHorario" parameterType="int">
+        DELETE FROM horarios WHERE IdHorario = #{id}
+    </delete>
+
+    <select id="listarHorarios" resultType="ProyectoCinePersistencia.entities.Horario">
+        SELECT * FROM horarios
+    </select>
+</mapper>

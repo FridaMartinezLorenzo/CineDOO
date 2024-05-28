@@ -1,9 +1,12 @@
+C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\db\mappers\HorarioMapper.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\db\mappers\PeliculaMapper.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\utils\dbConnection.java
+C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\db\mappers\CategoriaMapper.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\utils\MyBatisUtil.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\dao\pelicula\PeliculaDAO.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\Main.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\dao\venta\VentaDAO.java
+C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\db\mappers\VentaMapper.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\dao\categoria\CategoriaDAO.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\dao\pelicula\PeliculaDAOImpl.java
 C:\Users\frida\Documents\CineDOO\ProyectoCine\src\main\java\ProyectoCinePersistencia\dao\venta\VentaDAOImpl.java

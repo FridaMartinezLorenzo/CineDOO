@@ -1,45 +1,59 @@
-import ProyectoCinePersistencia.dao.venta.VentaDAOImpl;
-import ProyectoCinePersistencia.entities.Venta;
+import ProyectoCinePersistencia.dao.promocion.PromocionDAOImpl;
+import ProyectoCinePersistencia.entities.Promocion;
+import ProyectoCinePersistencia.utils.MyBatisUtil;
+import org.apache.ibatis.session.SqlSessionFactory;
 
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-        // Crear instancia de VentaDAO
-        VentaDAOImpl ventaDAO = new VentaDAOImpl();
+        // Crear instancia de SqlSessionFactory
+        SqlSessionFactory sqlSessionFactory = MyBatisUtil.getSqlSessionFactory();
+        
+        // Crear instancia de PromocionDAO
+        PromocionDAOImpl promocionDAO = new PromocionDAOImpl(sqlSessionFactory);
+        
+        // Crear una nueva promoción
+        Promocion nuevaPromocion = new Promocion();
+        nuevaPromocion.setFechaInicio("2024-06-01");
+        nuevaPromocion.setFechaFin("2024-12-31");
+        nuevaPromocion.setDescuento(20);
+        promocionDAO.Crear(nuevaPromocion);
+        System.out.println("Promoción creada con ID: " + nuevaPromocion.getIdPromocion());
 
-        // Crear una nueva venta
-        Venta nuevaVenta = new Venta();
-        nuevaVenta.setIdUsuario(3); // IdUsuario de "Maria Garcia"
-        nuevaVenta.setIdFuncion(1); // IdFuncion para la función 1
-        nuevaVenta.setTotal(150.00f);
-        nuevaVenta.setCantBoletos(2);
-        ventaDAO.Crear(nuevaVenta);
-        System.out.println("Venta creada con ID: " + nuevaVenta.getIdVenta());
-
-        // Buscar una venta por su ID
-        Venta ventaEncontrada = ventaDAO.Buscar(nuevaVenta.getIdVenta());
-        if (ventaEncontrada != null) {
-            System.out.println("Venta encontrada: " + ventaEncontrada.getIdVenta() + ", Usuario: " + ventaEncontrada.getNombreUsuario());
+        // Buscar una promoción por su ID
+        Promocion promocionEncontrada = promocionDAO.Buscar(nuevaPromocion.getIdPromocion());
+        if (promocionEncontrada != null) {
+            System.out.println("Promoción encontrada: ID = " + promocionEncontrada.getIdPromocion() + 
+                               ", FechaInicio = " + promocionEncontrada.getFechaInicio() + 
+                               ", FechaFin = " + promocionEncontrada.getFechaFin() + 
+                               ", Descuento = " + promocionEncontrada.getDescuento());
         } else {
-            System.out.println("Venta no encontrada.");
+            System.out.println("Promoción no encontrada.");
+        
         }
 
-        // Actualizar la venta
-        ventaEncontrada.setTotal(200.00f);
-        ventaDAO.Actualizar(ventaEncontrada);
-        System.out.println("Venta actualizada: " + ventaEncontrada.getIdVenta() + ", Nuevo Total: " + ventaEncontrada.getTotal());
+        // Actualizar la promoción
+        promocionEncontrada.setDescuento(25);
+        promocionDAO.Actualizar(promocionEncontrada);
+        System.out.println("Promoción actualizada: ID = " + promocionEncontrada.getIdPromocion() + 
+                           ", Nuevo Descuento = " + promocionEncontrada.getDescuento());
 
-        // Listar todas las ventas
-        List<Venta> listaVentas = ventaDAO.Listar();
-        System.out.println("Lista de Ventas:");
-        for (Venta venta : listaVentas) {
-            System.out.println("ID: " + venta.getIdVenta() + ", Usuario: " + venta.getNombreUsuario() + ", Pelicula: " + venta.getTituloPelicula() + ", Hora: " + venta.getHoraInicio() + ", Total: " + venta.getTotal() + ", Boletos: " + venta.getCantBoletos());
+        // Listar todas las promociones
+        List<Promocion> listaPromociones = promocionDAO.Listar();
+        System.out.println("Lista de Promociones:");
+        for (Promocion promocion : listaPromociones) {
+        
+            System.out.println("ID: " + promocion.getIdPromocion() + 
+                               ", FechaInicio: " + promocion.getFechaInicio() + 
+                               ", FechaFin: " + promocion.getFechaFin() + 
+                               ", Descuento: " + promocion.getDescuento());
         }
 
-        // Eliminar una venta
-        ventaDAO.Eliminar(nuevaVenta);
-        System.out.println("Venta eliminada con ID: " + nuevaVenta.getIdVenta());
+        // Eliminar una promoción
+        
+        promocionDAO.Eliminar(nuevaPromocion.getIdPromocion());
+        System.out.println("Promoción eliminada con ID: " + nuevaPromocion.getIdPromocion());
     }
 }

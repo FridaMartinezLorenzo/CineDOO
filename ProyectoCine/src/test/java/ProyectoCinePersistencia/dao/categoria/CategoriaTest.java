@@ -13,7 +13,7 @@ import org.junit.Test;
 import ProyectoCinePersistencia.entities.Categoria;
 import ProyectoCinePersistencia.utils.MyBatisUtil;
 
-public class TestCategoria {
+public class CategoriaTest {
 
     private CategoriaDAOImpl categoriaDAO;
     private Categoria categoria;

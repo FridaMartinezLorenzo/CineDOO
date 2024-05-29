@@ -15,7 +15,7 @@ import ProyectoCinePersistencia.dao.horario.HorarioDAOImpl;
 import ProyectoCinePersistencia.entities.Horario;
 import ProyectoCinePersistencia.utils.MyBatisUtil;
 
-public class TestHorario {
+public class HorarioTest {
 
     private HorarioDAOImpl horarioDAO;
     private Horario horario;

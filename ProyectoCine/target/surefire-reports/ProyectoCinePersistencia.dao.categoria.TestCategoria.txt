@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ProyectoCinePersistencia.dao.categoria.TestCategoria
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.721 s - in ProyectoCinePersistencia.dao.categoria.TestCategoria
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.011 s - in ProyectoCinePersistencia.dao.categoria.TestCategoria

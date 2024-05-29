@@ -4,33 +4,32 @@
  */
 package ProyectoCinePersistencia.entities;
 
-
 public class Categoria {
+
     //Atributos
     private int IdCategoria;
     private String Nombre;
-    
+
     //Constructor
-    public Categoria(){
+    public Categoria() {
         IdCategoria = 0;
         Nombre = "";
     }
-    
+
     //Metodos
-    public void setIdCategoria( int id){
+    public void setIdCategoria(int id) {
         IdCategoria = id;
     }
-    
-    public int getCategoria(){
+
+    public int getIdCategoria() {
         return IdCategoria;
     }
-    
-    public void setNombre(String nombre){
+
+    public void setNombre(String nombre) {
         Nombre = nombre;
     }
-    
-    public String getNombre(){
+
+    public String getNombre() {
         return Nombre;
     }
 }
-

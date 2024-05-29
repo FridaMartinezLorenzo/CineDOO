@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProyectoCinePersistencia.db.mappers.PromocionMapper">
+    
+    <resultMap id="PromocionResult" type="ProyectoCinePersistencia.entities.Promocion">
+        <id property="IdPromocion" column="IdPromocion"/>
+        <result property="FechaInicio" column="FechaInicio"/>
+        <result property="FechaFin" column="FechaFin"/>
+        <result property="Descuento" column="Descuento"/>
+    </resultMap>
+    
+    <insert id="insertarPromocion" parameterType="ProyectoCinePersistencia.entities.Promocion">
+        INSERT INTO promociones (FechaInicio, FechaFin, Descuento)
+        VALUES (#{FechaInicio}, #{FechaFin}, #{Descuento})
+        <selectKey keyProperty="IdPromocion" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+    
+    <select id="buscarPromocion" resultMap="PromocionResult" parameterType="int">
+        SELECT * FROM promociones WHERE IdPromocion = #{id}
+    </select>
+    
+    <update id="actualizarPromocion" parameterType="ProyectoCinePersistencia.entities.Promocion">
+        UPDATE promociones
+        SET FechaInicio = #{FechaInicio}, FechaFin = #{FechaFin}, Descuento = #{Descuento}
+        WHERE IdPromocion = #{IdPromocion}
+    </update>
+    
+    <delete id="eliminarPromocion" parameterType="int">
+        DELETE FROM promociones WHERE IdPromocion = #{id}
+    </delete>
+    
+    <select id="listarPromociones" resultMap="PromocionResult">
+        SELECT * FROM promociones
+    </select>
+    
+</mapper>

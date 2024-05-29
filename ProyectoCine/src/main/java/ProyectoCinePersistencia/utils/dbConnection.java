@@ -23,9 +23,9 @@ public class dbConnection {
         try {
             Class.forName(driver);
             cx = DriverManager.getConnection(url + bd, user, password);
-            System.out.println("Se conecto a la bd");
+           // System.out.println("Se conecto a la bd");
         } catch (ClassNotFoundException ex) {
-            System.out.println("No se conecto a la bd " + bd);
+           // System.out.println("No se conecto a la bd " + bd);
             Logger.getLogger(dbConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
         

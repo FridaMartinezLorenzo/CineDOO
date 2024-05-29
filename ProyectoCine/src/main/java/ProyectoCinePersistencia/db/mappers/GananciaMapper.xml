@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProyectoCinePersistencia.db.mappers.GananciaMapper">
+
+    <select id="sacarGanancia" resultType="java.lang.Double" parameterType="int">
+        SELECT SUM(ventas.Total) as Ventas 
+        FROM ventas
+        JOIN funciones ON ventas.IdFuncion = funciones.IdFuncion
+        WHERE funciones.IdPelicula = #{idPelicula}
+    </select>
+</mapper>

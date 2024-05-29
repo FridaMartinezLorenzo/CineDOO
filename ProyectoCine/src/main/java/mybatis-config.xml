@@ -25,5 +25,9 @@
         <mapper resource="ProyectoCinePersistencia/db/mappers/HorarioMapper.xml"/>
         <mapper resource="ProyectoCinePersistencia/db/mappers/VentaMapper.xml"/>
         <mapper resource="ProyectoCinePersistencia/db/mappers/PromocionMapper.xml"/>
+        <mapper resource="ProyectoCinePersistencia/db/mappers/UsuarioMapper.xml"/>
+        <mapper resource="ProyectoCinePersistencia/db/mappers/GananciaMapper.xml"/>
+        <mapper resource="ProyectoCinePersistencia/db/mappers/LoginMapper.xml"/>
+        <mapper resource="ProyectoCinePersistencia/db/mappers/RolMapper.xml"/>
     </mappers>
 </configuration>

@@ -29,5 +29,6 @@
         <mapper resource="ProyectoCinePersistencia/db/mappers/GananciaMapper.xml"/>
         <mapper resource="ProyectoCinePersistencia/db/mappers/LoginMapper.xml"/>
         <mapper resource="ProyectoCinePersistencia/db/mappers/RolMapper.xml"/>
+        <mapper resource="ProyectoCinePersistencia/db/mappers/SalaMapper.xml"/>
     </mappers>
 </configuration>

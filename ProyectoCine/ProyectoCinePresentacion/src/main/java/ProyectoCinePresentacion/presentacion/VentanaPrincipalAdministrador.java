@@ -1,15 +1,22 @@
 package ProyectoCinePresentacion.presentacion;
 
-import ProyectoCinePresentacion.presentacion.pelicula.VentanaCrearPelicula;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import ProyectoCinePersistencia.dao.categoria.CategoriaDAOImpl;
 import ProyectoCinePersistencia.entities.Categoria;
 import ProyectoCinePersistencia.utils.MyBatisUtil;
-
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import ProyectoCinePresentacion.presentacion.pelicula.VentanaCrearPelicula;
+import ProyectoCinePresentacion.presentacion.pelicula.VentanaListarPeliculas;
+import ProyectoCinePresentacion.presentacion.pelicula.VentanaSeleccionarPelicula;
 
 public class VentanaPrincipalAdministrador extends JFrame {
 
@@ -101,10 +108,12 @@ public class VentanaPrincipalAdministrador extends JFrame {
                         ventanaCrearPelicula.mostrar();
                         break;
                     case "Listar Películas":
-                        // Listar Películas
+                        VentanaListarPeliculas ventanaListarPeliculas = new VentanaListarPeliculas();
+                        ventanaListarPeliculas.mostrar();
                         break;
                     case "Actualizar Película":
-                        // Actualizar Película
+                        VentanaSeleccionarPelicula ventanaSeleccionarPelicula = new VentanaSeleccionarPelicula();
+                        ventanaSeleccionarPelicula.mostrar();
                         break;
                     case "Eliminar Película":
                         // Eliminar Película

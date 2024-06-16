@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 public class VentanaCrearPelicula extends JFrame {
 
@@ -102,6 +101,7 @@ public class VentanaCrearPelicula extends JFrame {
         setVisible(true);
     }
 
+    /*
     public static void main(String[] args) {
         // Ejemplo de uso para probar la ventana
         SwingUtilities.invokeLater(() -> {
@@ -110,4 +110,5 @@ public class VentanaCrearPelicula extends JFrame {
             ventana.mostrar();
         });
     }
+     */
 }

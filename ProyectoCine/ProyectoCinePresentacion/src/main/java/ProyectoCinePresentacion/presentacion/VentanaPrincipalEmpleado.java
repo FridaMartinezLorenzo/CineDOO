@@ -64,6 +64,8 @@ public class VentanaPrincipalEmpleado extends JFrame {
         return menuItem;
     }
 
+    /*
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -72,7 +74,7 @@ public class VentanaPrincipalEmpleado extends JFrame {
             }
         });
     }
-
+     */
     public void mostrar() {
         setVisible(true);
     }

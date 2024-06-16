@@ -22,6 +22,10 @@
         SELECT * FROM peliculas WHERE IdPelicula = #{id}
     </select>
 
+    <select id="buscarPeliculaPorTitulo" parameterType="String" resultType="Pelicula">
+        SELECT * FROM peliculas WHERE Titulo = #{titulo}
+    </select>
+
     <update id="actualizarPelicula" parameterType="Pelicula">
         UPDATE peliculas SET Titulo = #{titulo}, Sinopsis = #{sinopsis}, Duracion = #{duracion}, FechaEstreno = #{fechaEstreno}, IdCategoria = #{idCategoria}
         WHERE IdPelicula = #{idPelicula}

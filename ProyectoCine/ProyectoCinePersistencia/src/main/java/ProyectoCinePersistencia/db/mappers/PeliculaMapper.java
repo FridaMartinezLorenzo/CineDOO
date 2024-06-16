@@ -10,6 +10,8 @@ public interface PeliculaMapper {
 
     Pelicula buscarPelicula(int id);
 
+    Pelicula buscarPeliculaPorTitulo(String titulo);
+
     void actualizarPelicula(Pelicula pelicula);
 
     void eliminarPelicula(int id);

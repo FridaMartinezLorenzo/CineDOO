@@ -1,11 +1,20 @@
 package ProyectoCinePresentacion.presentacion;
 
-import ProyectoCinePresentacion.controllers.MainController;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import ProyectoCinePersistencia.entities.Usuario;
+import ProyectoCinePresentacion.controllers.MainController;
 
 public class VentanaLogin extends JFrame {
 
@@ -64,9 +73,21 @@ public class VentanaLogin extends JFrame {
                 String email = emailField.getText();
                 String password = new String(passwordField.getPassword());
 
-                if (controller.autenticarUsuario(email, password)) {
+                Usuario usuario = new Usuario();
+                usuario = controller.autenticarUsuario(email, password);
+
+                if (usuario != null) {
                     JOptionPane.showMessageDialog(VentanaLogin.this, "Login exitoso");
                     // Lógica adicional para abrir la siguiente vista
+
+                    if (usuario.getIdRol() == 1) {
+                        VentanaPrincipalAdministrador ventanaPrincipalAdministrador = new VentanaPrincipalAdministrador();
+                        ventanaPrincipalAdministrador.mostrar();
+                    } else if (usuario.getIdRol() == 2) {
+                        VentanaPrincipalEmpleado ventanaPrincipalEmpleado = new VentanaPrincipalEmpleado();
+                        ventanaPrincipalEmpleado.mostrar();
+                    }
+                    setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(VentanaLogin.this, "Credenciales incorrectas");
                 }

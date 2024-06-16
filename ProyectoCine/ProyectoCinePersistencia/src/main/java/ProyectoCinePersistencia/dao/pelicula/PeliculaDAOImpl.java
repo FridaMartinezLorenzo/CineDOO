@@ -35,6 +35,14 @@ public class PeliculaDAOImpl implements PeliculaDAO {
     }
 
     @Override
+    public Pelicula BuscarPorTitulo(String titulo) {
+        try (SqlSession session = sqlSessionFactory.openSession()) {
+            PeliculaMapper mapper = session.getMapper(PeliculaMapper.class);
+            return mapper.buscarPeliculaPorTitulo(titulo);
+        }
+    }
+
+    @Override
     public void Actualizar(Pelicula pelicula) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             PeliculaMapper mapper = session.getMapper(PeliculaMapper.class);

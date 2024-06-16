@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: ProyectoCinePersistencia.dao.horario.TestHorario
--------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.906 s - in ProyectoCinePersistencia.dao.horario.TestHorario

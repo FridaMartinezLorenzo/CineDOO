@@ -87,19 +87,87 @@ public class VentanaPrincipalAdministrador extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Acción a realizar cuando se selecciona el ítem del menú
                 JOptionPane.showMessageDialog(VentanaPrincipalAdministrador.this, "Seleccionaste: " + name);
-                // Menú de tratamiento de la opción seleccionada
 
                 // Hacemos el precargado de los datos que podrían ser necesarios
                 CategoriaDAOImpl categoriaDAO = new CategoriaDAOImpl(MyBatisUtil.getSqlSessionFactory());
                 List<Categoria> categorias = categoriaDAO.Listar();
+                List<String> nombresCategorias = categorias.stream()
+                        .map(Categoria::getNombre)
+                        .collect(Collectors.toList());
 
-                if (name.equals("Crear Película")) {
-                    // Convertir la lista de Categoria a una lista de String
-                    List<String> nombresCategorias = categorias.stream()
-                            .map(Categoria::getNombre)
-                            .collect(Collectors.toList());
-                    VentanaCrearPelicula ventanaCrearPelicula = new VentanaCrearPelicula(nombresCategorias);
-                    ventanaCrearPelicula.mostrar();
+                switch (name) {
+                    case "Crear Película":
+                        VentanaCrearPelicula ventanaCrearPelicula = new VentanaCrearPelicula(nombresCategorias);
+                        ventanaCrearPelicula.mostrar();
+                        break;
+                    case "Listar Películas":
+                        // Listar Películas
+                        break;
+                    case "Actualizar Película":
+                        // Actualizar Película
+                        break;
+                    case "Eliminar Película":
+                        // Eliminar Película
+                        break;
+                    case "Ver Ganancias":
+                        // Ver Ganancias
+                        break;
+                    case "Crear Horario":
+                        // Crear Horario
+                        break;
+                    case "Listar Horarios":
+                        // Listar Horarios
+                        break;
+                    case "Actualizar Horario":
+                        // Actualizar Horario
+                        break;
+                    case "Eliminar Horario":
+                        // Eliminar Horario
+                        break;
+                    case "Crear Promoción":
+                        // Crear Promoción
+                        break;
+                    case "Listar Promociones":
+                        // Listar Promociones
+                        break;
+                    case "Actualizar Promoción":
+                        // Actualizar Promoción
+                        break;
+                    case "Eliminar Promoción":
+                        // Eliminar Promoción
+                        break;
+                    case "Crear Sala":
+                        // Crear Sala
+                        break;
+                    case "Listar Salas":
+                        // Listar Salas
+                        break;
+                    case "Actualizar Sala":
+                        // Actualizar Sala
+                        break;
+                    case "Eliminar Sala":
+                        // Eliminar Sala
+                        break;
+                    case "Crear Usuario":
+                        // Crear Usuario
+                        break;
+                    case "Listar Usuarios":
+                        // Listar Usuarios
+                        break;
+                    case "Actualizar Usuario":
+                        // Actualizar Usuario
+                        break;
+                    case "Eliminar Usuario":
+                        // Eliminar Usuario
+                        break;
+                    case "Crear Venta":
+                        // Crear Venta
+                        break;
+                    case "Eliminar Venta":
+                        // Eliminar Venta
+                        break;
+                    default:
+                        break;
                 }
             }
         });
@@ -110,7 +178,9 @@ public class VentanaPrincipalAdministrador extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
+    /*
+
+     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -118,4 +188,5 @@ public class VentanaPrincipalAdministrador extends JFrame {
             }
         });
     }
+     */
 }

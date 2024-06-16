@@ -1,5 +1,12 @@
 package ProyectoCinePresentacion.presentacion;
 
+import ProyectoCinePresentacion.presentacion.pelicula.VentanaCrearPelicula;
+import ProyectoCinePersistencia.dao.categoria.CategoriaDAOImpl;
+import ProyectoCinePersistencia.entities.Categoria;
+import ProyectoCinePersistencia.utils.MyBatisUtil;
+
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,52 +25,47 @@ public class VentanaPrincipalAdministrador extends JFrame {
 
         // Menú de Película
         JMenu menuPelicula = new JMenu("Película");
-        menuPelicula.add(createMenuItem("Crear"));
-        menuPelicula.add(createMenuItem("Leer"));
-        menuPelicula.add(createMenuItem("Actualizar"));
-        menuPelicula.add(createMenuItem("Eliminar"));
+        menuPelicula.add(createMenuItem("Crear Película"));
+        menuPelicula.add(createMenuItem("Listar Películas"));
+        menuPelicula.add(createMenuItem("Actualizar Película"));
+        menuPelicula.add(createMenuItem("Eliminar Película"));
 
         // Menú de Ganancia
         JMenu menuGanancia = new JMenu("Ganancia");
-        menuGanancia.add(createMenuItem("Crear"));
-        menuGanancia.add(createMenuItem("Leer"));
-        menuGanancia.add(createMenuItem("Actualizar"));
-        menuGanancia.add(createMenuItem("Eliminar"));
+        menuGanancia.add(createMenuItem("Ver Ganancias"));
 
         // Menú de Horario
         JMenu menuHorario = new JMenu("Horario");
-        menuHorario.add(createMenuItem("Crear"));
-        menuHorario.add(createMenuItem("Leer"));
-        menuHorario.add(createMenuItem("Actualizar"));
-        menuHorario.add(createMenuItem("Eliminar"));
+        menuHorario.add(createMenuItem("Crear Horario"));
+        menuHorario.add(createMenuItem("Listar Horarios"));
+        menuHorario.add(createMenuItem("Actualizar Horario"));
+        menuHorario.add(createMenuItem("Eliminar Horario"));
 
         // Menú de Promoción
         JMenu menuPromocion = new JMenu("Promoción");
-        menuPromocion.add(createMenuItem("Crear"));
-        menuPromocion.add(createMenuItem("Leer"));
-        menuPromocion.add(createMenuItem("Actualizar"));
-        menuPromocion.add(createMenuItem("Eliminar"));
+        menuPromocion.add(createMenuItem("Crear Promoción"));
+        menuPromocion.add(createMenuItem("Listar Promociones"));
+        menuPromocion.add(createMenuItem("Actualizar Promoción"));
+        menuPromocion.add(createMenuItem("Eliminar Promoción"));
 
         // Menú de Sala
         JMenu menuSala = new JMenu("Sala");
-        menuSala.add(createMenuItem("Crear"));
-        menuSala.add(createMenuItem("Leer"));
-        menuSala.add(createMenuItem("Actualizar"));
-        menuSala.add(createMenuItem("Eliminar"));
+        menuSala.add(createMenuItem("Crear Sala"));
+        menuSala.add(createMenuItem("Listar Salas"));
+        menuSala.add(createMenuItem("Actualizar Sala"));
+        menuSala.add(createMenuItem("Eliminar Sala"));
 
         // Menú de Usuario
         JMenu menuUsuario = new JMenu("Usuario");
-        menuUsuario.add(createMenuItem("Crear"));
-        menuUsuario.add(createMenuItem("Leer"));
-        menuUsuario.add(createMenuItem("Actualizar"));
-        menuUsuario.add(createMenuItem("Eliminar"));
+        menuUsuario.add(createMenuItem("Crear Usuario"));
+        menuUsuario.add(createMenuItem("Listar Usuarios"));
+        menuUsuario.add(createMenuItem("Actualizar Usuario"));
+        menuUsuario.add(createMenuItem("Eliminar Usuario"));
 
         // Menú de Venta
         JMenu menuVenta = new JMenu("Venta");
-        menuVenta.add(createMenuItem("Crear"));
-        menuVenta.add(createMenuItem("Leer"));
-        menuVenta.add(createMenuItem("Actualizar"));
-        menuVenta.add(createMenuItem("Eliminar"));
+        menuVenta.add(createMenuItem("Crear Venta"));
+        menuVenta.add(createMenuItem("Eliminar Venta"));
 
         // Agregar los menús a la barra de menú
         menuBar.add(menuPelicula);
@@ -85,6 +87,20 @@ public class VentanaPrincipalAdministrador extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Acción a realizar cuando se selecciona el ítem del menú
                 JOptionPane.showMessageDialog(VentanaPrincipalAdministrador.this, "Seleccionaste: " + name);
+                // Menú de tratamiento de la opción seleccionada
+
+                // Hacemos el precargado de los datos que podrían ser necesarios
+                CategoriaDAOImpl categoriaDAO = new CategoriaDAOImpl(MyBatisUtil.getSqlSessionFactory());
+                List<Categoria> categorias = categoriaDAO.Listar();
+
+                if (name.equals("Crear Película")) {
+                    // Convertir la lista de Categoria a una lista de String
+                    List<String> nombresCategorias = categorias.stream()
+                            .map(Categoria::getNombre)
+                            .collect(Collectors.toList());
+                    VentanaCrearPelicula ventanaCrearPelicula = new VentanaCrearPelicula(nombresCategorias);
+                    ventanaCrearPelicula.mostrar();
+                }
             }
         });
         return menuItem;
@@ -92,5 +108,14 @@ public class VentanaPrincipalAdministrador extends JFrame {
 
     public void mostrar() {
         setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new VentanaPrincipalAdministrador().setVisible(true);
+            }
+        });
     }
 }

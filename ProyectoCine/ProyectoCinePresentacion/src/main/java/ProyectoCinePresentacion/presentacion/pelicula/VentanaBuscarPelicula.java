@@ -7,10 +7,7 @@ import ProyectoCinePersistencia.entities.Pelicula;
 import ProyectoCinePersistencia.utils.MyBatisUtil;
 
 import javax.swing.*;
-
 import java.awt.*;
-
-import org.apache.ibatis.session.SqlSessionFactory;
 
 public class VentanaBuscarPelicula extends JFrame {
 
@@ -24,7 +21,7 @@ public class VentanaBuscarPelicula extends JFrame {
 
     private void initComponents() {
         setTitle("Detalles de la Película");
-        setSize(400, 300);
+        setSize(800, 800); // Tamaño adecuado
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null); // Centrar ventana en pantalla
 
@@ -32,7 +29,6 @@ public class VentanaBuscarPelicula extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        // Componentes: Labels con la información de la película
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(new JLabel("Título:"), gbc);
@@ -47,7 +43,7 @@ public class VentanaBuscarPelicula extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 1;
-        JTextArea sinopsisArea = new JTextArea(pelicula.getSinopsis());
+        JTextArea sinopsisArea = new JTextArea(pelicula.getSinopsis(), 5, 20);
         sinopsisArea.setWrapStyleWord(true);
         sinopsisArea.setLineWrap(true);
         sinopsisArea.setOpaque(false);
@@ -55,7 +51,9 @@ public class VentanaBuscarPelicula extends JFrame {
         sinopsisArea.setFocusable(false);
         sinopsisArea.setBackground(UIManager.getColor("Label.background"));
         sinopsisArea.setFont(UIManager.getFont("Label.font"));
-        panel.add(sinopsisArea, gbc);
+        JScrollPane scrollPane = new JScrollPane(sinopsisArea);
+        scrollPane.setBorder(null);
+        panel.add(scrollPane, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;

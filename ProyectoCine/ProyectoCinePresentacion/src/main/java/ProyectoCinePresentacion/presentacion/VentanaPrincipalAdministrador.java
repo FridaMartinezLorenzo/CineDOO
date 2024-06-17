@@ -34,6 +34,7 @@ public class VentanaPrincipalAdministrador extends JFrame {
         JMenu menuPelicula = new JMenu("Película");
         menuPelicula.add(createMenuItem("Crear Película"));
         menuPelicula.add(createMenuItem("Listar Películas"));
+        menuPelicula.add(createMenuItem("Buscar Película"));
         menuPelicula.add(createMenuItem("Actualizar Película"));
         menuPelicula.add(createMenuItem("Eliminar Película"));
 
@@ -111,9 +112,13 @@ public class VentanaPrincipalAdministrador extends JFrame {
                         VentanaListarPeliculas ventanaListarPeliculas = new VentanaListarPeliculas();
                         ventanaListarPeliculas.mostrar();
                         break;
-                    case "Actualizar Película":
-                        VentanaSeleccionarPelicula ventanaSeleccionarPelicula = new VentanaSeleccionarPelicula();
-                        ventanaSeleccionarPelicula.mostrar();
+                        case "Actualizar Película":
+                        VentanaSeleccionarPelicula ventanaSeleccionarPeliculaEditar = new VentanaSeleccionarPelicula("editar");
+                        ventanaSeleccionarPeliculaEditar.mostrar();
+                        break;
+                    case "Buscar Película":
+                        VentanaSeleccionarPelicula ventanaSeleccionarPeliculaBuscar = new VentanaSeleccionarPelicula("buscar");
+                        ventanaSeleccionarPeliculaBuscar.mostrar();
                         break;
                     case "Eliminar Película":
                         // Eliminar Película

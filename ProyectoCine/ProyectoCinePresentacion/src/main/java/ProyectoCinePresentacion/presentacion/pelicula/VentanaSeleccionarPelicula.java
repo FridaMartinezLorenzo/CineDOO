@@ -6,14 +6,13 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import java.util.stream.Collectors;
 
 import ProyectoCinePersistencia.dao.pelicula.PeliculaDAOImpl;
 import ProyectoCinePersistencia.dao.categoria.CategoriaDAOImpl;
@@ -25,8 +24,10 @@ public class VentanaSeleccionarPelicula extends JFrame {
 
     private JComboBox<String> peliculasComboBox;
     private List<Pelicula> peliculas;
+    private String caso;
 
-    public VentanaSeleccionarPelicula() {
+    public VentanaSeleccionarPelicula(String caso) {
+        this.caso = caso;
         PeliculaDAOImpl peliculaDAO = new PeliculaDAOImpl(MyBatisUtil.getSqlSessionFactory());
         this.peliculas = peliculaDAO.Listar();
         initComponents();
@@ -59,12 +60,17 @@ public class VentanaSeleccionarPelicula extends JFrame {
                 int selectedIndex = peliculasComboBox.getSelectedIndex();
                 if (selectedIndex >= 0 && selectedIndex < peliculas.size()) {
                     Pelicula peliculaSeleccionada = peliculas.get(selectedIndex);
-                    CategoriaDAOImpl categoriaDAO = new CategoriaDAOImpl(MyBatisUtil.getSqlSessionFactory());
-                    List<String> nombresCategorias = categoriaDAO.Listar().stream()
-                            .map(Categoria::getNombre)
-                            .collect(Collectors.toList());
-                    VentanaEditarPelicula ventanaEditarPelicula = new VentanaEditarPelicula(peliculaSeleccionada.getIdPelicula(), nombresCategorias);
-                    ventanaEditarPelicula.mostrar();
+                    if (caso.equals("editar")) {
+                        CategoriaDAOImpl categoriaDAO = new CategoriaDAOImpl(MyBatisUtil.getSqlSessionFactory());
+                        List<String> nombresCategorias = categoriaDAO.Listar().stream()
+                                .map(Categoria::getNombre)
+                                .collect(Collectors.toList());
+                        VentanaEditarPelicula ventanaEditarPelicula = new VentanaEditarPelicula(peliculaSeleccionada.getIdPelicula(), nombresCategorias);
+                        ventanaEditarPelicula.mostrar();
+                    } else if (caso.equals("buscar")) {
+                        VentanaBuscarPelicula ventanaBuscarPelicula = new VentanaBuscarPelicula(peliculaSeleccionada.getIdPelicula());
+                        ventanaBuscarPelicula.mostrar();
+                    }
                     dispose();
                 }
             }
@@ -83,14 +89,4 @@ public class VentanaSeleccionarPelicula extends JFrame {
     public void mostrar() {
         setVisible(true);
     }
-
-    /*
-     
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            VentanaSeleccionarPelicula ventana = new VentanaSeleccionarPelicula();
-            ventana.mostrar();
-        });
-    }
-     */
 }

@@ -1,94 +1,71 @@
 package ProyectoCinePresentacion.presentacion.pelicula;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 
-import ProyectoCinePersistencia.dao.pelicula.PeliculaDAOImpl;
 import ProyectoCinePersistencia.entities.Pelicula;
-import ProyectoCinePersistencia.utils.MyBatisUtil;
+import ProyectoCinePresentacion.controllers.PeliculaController;
 
 public class VentanaListarPeliculas extends JFrame {
 
-    private JTable peliculasTable;
-    private DefaultTableModel tableModel;
+    private JTable tablaPeliculas;
+    private PeliculaController peliculaController;
 
     public VentanaListarPeliculas() {
+        this.peliculaController = new PeliculaController();
         initComponents();
-        cargarDatosPeliculas();
     }
 
     private void initComponents() {
-        setTitle("Listar Películas");
-        setSize(600, 400);
+        setTitle("Listado de Películas");
+        setSize(600, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null); // Centrar ventana en pantalla
+        setLocationRelativeTo(null);
 
-        // Crear el modelo de la tabla
-        tableModel = new DefaultTableModel();
-        tableModel.addColumn("No.");
-        tableModel.addColumn("Título");
+        JPanel panel = new JPanel(new BorderLayout());
 
-        // Crear la tabla y establecer el modelo
-        peliculasTable = new JTable(tableModel);
+        String[] columnNames = {"ID", "Título", "Duración", "Fecha de Estreno"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        tablaPeliculas = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(tablaPeliculas);
+        panel.add(scrollPane, BorderLayout.CENTER);
 
-        // Centrar el texto en las celdas
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        peliculasTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        peliculasTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        tablaPeliculas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int selectedRow = tablaPeliculas.getSelectedRow();
+                    int idPelicula = (int) tablaPeliculas.getValueAt(selectedRow, 0);
+                    VentanaBuscarPelicula ventanaBuscarPelicula = new VentanaBuscarPelicula(idPelicula);
+                    ventanaBuscarPelicula.mostrar();
+                }
+            }
+        });
 
-        // Ajustar el ancho de las columnas
-        TableColumnModel columnModel = peliculasTable.getColumnModel();
-        columnModel.getColumn(0).setPreferredWidth(50); // Ancho de la columna "No."
-        columnModel.getColumn(1).setPreferredWidth(200); // Ancho de la columna "Título"
+        cargarPeliculas(model);
 
-        // Configurar el JScrollPane con la tabla centrada
-        JScrollPane scrollPane = new JScrollPane(peliculasTable);
-        scrollPane.setPreferredSize(new Dimension(400, 300));
-
-        // Layout y agregar componentes
-        setLayout(new BorderLayout());
-
-        JPanel tablePanel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        tablePanel.add(scrollPane, gbc);
-        add(tablePanel, BorderLayout.CENTER);
-
-        // Botón de cerrar (opcional)
-        JPanel buttonPanel = new JPanel();
-        JButton cerrarButton = new JButton("Cerrar");
-        cerrarButton.addActionListener(e -> dispose());
-        buttonPanel.add(cerrarButton);
-
-        gbc.gridy = 1;
-        gbc.insets = new Insets(20, 0, 0, 0); // Añadir margen superior de 20px
-        tablePanel.add(buttonPanel, gbc);
+        add(panel);
     }
 
-    private void cargarDatosPeliculas() {
-        PeliculaDAOImpl peliculaDAO = new PeliculaDAOImpl(MyBatisUtil.getSqlSessionFactory());
-        List<Pelicula> peliculas = peliculaDAO.Listar();
-
-        for (int i = 0; i < peliculas.size(); i++) {
-            Pelicula pelicula = peliculas.get(i);
-            tableModel.addRow(new Object[]{i + 1, pelicula.getTitulo()});
+    private void cargarPeliculas(DefaultTableModel model) {
+        List<Pelicula> peliculas = peliculaController.listarPeliculas();
+        for (Pelicula pelicula : peliculas) {
+            Object[] rowData = {
+                pelicula.getIdPelicula(),
+                pelicula.getTitulo(),
+                pelicula.getDuracion(),
+                pelicula.getFechaEstreno()
+            };
+            model.addRow(rowData);
         }
     }
 

@@ -77,7 +77,7 @@ public class VentanaLogin extends JFrame {
                 usuario = controller.autenticarUsuario(email, password);
 
                 if (usuario != null) {
-                    JOptionPane.showMessageDialog(VentanaLogin.this, "Login exitoso");
+                    //JOptionPane.showMessageDialog(VentanaLogin.this, "Login exitoso");
                     // Lógica adicional para abrir la siguiente vista
 
                     if (usuario.getIdRol() == 1) {

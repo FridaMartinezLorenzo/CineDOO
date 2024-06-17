@@ -36,8 +36,10 @@ public class PeliculaController {
         peliculaDAO.Actualizar(pelicula);
     }
 
-    public void eliminarPelicula(int id) {
+    public boolean eliminarPelicula(int id) {
         peliculaDAO.Eliminar(id);
+        //Haremos una busqueda para verificar que la pelicula fue eliminada
+        return peliculaDAO.Buscar(id) == null;
     }
 
     public List<Pelicula> listarPeliculas() {

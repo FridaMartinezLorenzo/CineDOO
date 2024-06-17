@@ -94,7 +94,7 @@ public class VentanaPrincipalAdministrador extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Acción a realizar cuando se selecciona el ítem del menú
-                JOptionPane.showMessageDialog(VentanaPrincipalAdministrador.this, "Seleccionaste: " + name);
+                //JOptionPane.showMessageDialog(VentanaPrincipalAdministrador.this, "Seleccionaste: " + name);
 
                 // Hacemos el precargado de los datos que podrían ser necesarios
                 CategoriaDAOImpl categoriaDAO = new CategoriaDAOImpl(MyBatisUtil.getSqlSessionFactory());
@@ -112,7 +112,7 @@ public class VentanaPrincipalAdministrador extends JFrame {
                         VentanaListarPeliculas ventanaListarPeliculas = new VentanaListarPeliculas();
                         ventanaListarPeliculas.mostrar();
                         break;
-                        case "Actualizar Película":
+                    case "Actualizar Película":
                         VentanaSeleccionarPelicula ventanaSeleccionarPeliculaEditar = new VentanaSeleccionarPelicula("editar");
                         ventanaSeleccionarPeliculaEditar.mostrar();
                         break;

@@ -1,18 +1,15 @@
 package ProyectoCinePresentacion.presentacion.pelicula;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.util.List;
+import ProyectoCinePresentacion.controllers.PeliculaController;
+import ProyectoCinePresentacion.controllers.CategoriaController;
+import ProyectoCinePersistencia.entities.Pelicula;
+import ProyectoCinePersistencia.entities.Categoria;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 public class VentanaCrearPelicula extends JFrame {
 
@@ -21,8 +18,10 @@ public class VentanaCrearPelicula extends JFrame {
     private JTextField duracionField;
     private JTextField fechaEstrenoField;
     private JComboBox<String> categoriasComboBox;
+    private PeliculaController peliculaController;
 
     public VentanaCrearPelicula(List<String> categorias) {
+        this.peliculaController = new PeliculaController();
         initComponents(categorias);
     }
 
@@ -30,14 +29,12 @@ public class VentanaCrearPelicula extends JFrame {
         setTitle("Crear Película");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Centrar ventana en pantalla
+        setLocationRelativeTo(null);
 
-        // Layout y componentes
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5); // Márgenes
+        gbc.insets = new Insets(5, 5, 5, 5);
 
-        // Componentes: Labels y Inputs
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(new JLabel("Título:"), gbc);
@@ -84,31 +81,53 @@ public class VentanaCrearPelicula extends JFrame {
         categoriasComboBox = new JComboBox<>(categorias.toArray(new String[0]));
         panel.add(categoriasComboBox, gbc);
 
-        // Botón de Guardar (opcional)
         gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         JButton guardarButton = new JButton("Guardar");
+        guardarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                crearPelicula();
+            }
+        });
         panel.add(guardarButton, gbc);
 
-        // Agregar panel al JFrame
         add(panel);
         pack();
+    }
+
+    private void crearPelicula() {
+        String titulo = tituloField.getText();
+        String sinopsis = sinopsisArea.getText();
+        int duracion = Integer.parseInt(duracionField.getText());
+        String fechaEstreno = fechaEstrenoField.getText();
+        String categoria = (String) categoriasComboBox.getSelectedItem();
+
+        Pelicula nuevaPelicula = new Pelicula(0, titulo, sinopsis, duracion, fechaEstreno, obtenerIdCategoria(categoria));
+        Pelicula peliculaCreada = peliculaController.crearPelicula(nuevaPelicula);
+
+        if (peliculaCreada.getIdPelicula() != -1) {
+            JOptionPane.showMessageDialog(this, "Película creada exitosamente");
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al crear la película. Verifique los datos.");
+        }
+    }
+
+    private int obtenerIdCategoria(String nombreCategoria) {
+        CategoriaController categoriaController = new CategoriaController();
+        List<Categoria> categorias = categoriaController.listarCategorias();
+        for (Categoria categoria : categorias) {
+            if (categoria.getNombre().equals(nombreCategoria)) {
+                return categoria.getIdCategoria();
+            }
+        }
+        return -1; // Categoría no encontrada
     }
 
     public void mostrar() {
         setVisible(true);
     }
-
-    /*
-    public static void main(String[] args) {
-        // Ejemplo de uso para probar la ventana
-        SwingUtilities.invokeLater(() -> {
-            List<String> categorias = List.of("Acción", "Comedia", "Drama", "Fantasía", "Ciencia Ficción");
-            VentanaCrearPelicula ventana = new VentanaCrearPelicula(categorias);
-            ventana.mostrar();
-        });
-    }
-     */
 }

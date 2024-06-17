@@ -1,29 +1,37 @@
 package ProyectoCinePresentacion.presentacion.pelicula;
 
-import ProyectoCinePersistencia.dao.pelicula.PeliculaDAOImpl;
-import ProyectoCinePersistencia.dao.categoria.CategoriaDAOImpl;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
 import ProyectoCinePersistencia.entities.Categoria;
 import ProyectoCinePersistencia.entities.Pelicula;
-import ProyectoCinePersistencia.utils.MyBatisUtil;
-
-import javax.swing.*;
-import java.awt.*;
+import ProyectoCinePresentacion.controllers.CategoriaController;
+import ProyectoCinePresentacion.controllers.PeliculaController;
 
 public class VentanaBuscarPelicula extends JFrame {
 
     private Pelicula pelicula;
 
     public VentanaBuscarPelicula(int idPelicula) {
-        PeliculaDAOImpl peliculaDAO = new PeliculaDAOImpl(MyBatisUtil.getSqlSessionFactory());
-        this.pelicula = peliculaDAO.Buscar(idPelicula);
+        PeliculaController peliculaController = new PeliculaController();
+        this.pelicula = peliculaController.buscarPelicula(idPelicula);
         initComponents();
     }
 
     private void initComponents() {
         setTitle("Detalles de la Película");
-        setSize(800, 800); // Tamaño adecuado
+        setSize(800, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null); // Centrar ventana en pantalla
+        setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -77,12 +85,10 @@ public class VentanaBuscarPelicula extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 4;
-        int idCategoria = pelicula.getIdCategoria();
-        CategoriaDAOImpl categoriaDAO = new CategoriaDAOImpl(MyBatisUtil.getSqlSessionFactory());
-        Categoria categoria = categoriaDAO.Buscar(idCategoria);
+        CategoriaController categoriaController = new CategoriaController();
+        Categoria categoria = categoriaController.buscarCategoria(pelicula.getIdCategoria());
         panel.add(new JLabel(categoria.getNombre()), gbc);
 
-        // Agregar panel al JFrame
         add(panel);
         pack();
     }

@@ -1,24 +1,15 @@
 package ProyectoCinePresentacion.presentacion.pelicula;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-
-import ProyectoCinePersistencia.dao.categoria.CategoriaDAOImpl;
-import ProyectoCinePersistencia.dao.pelicula.PeliculaDAOImpl;
+import ProyectoCinePresentacion.controllers.PeliculaController;
+import ProyectoCinePresentacion.controllers.CategoriaController;
 import ProyectoCinePersistencia.entities.Categoria;
 import ProyectoCinePersistencia.entities.Pelicula;
-import ProyectoCinePersistencia.utils.MyBatisUtil;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 public class VentanaEditarPelicula extends JFrame {
 
@@ -28,17 +19,18 @@ public class VentanaEditarPelicula extends JFrame {
     private JTextField fechaEstrenoField;
     private JComboBox<String> categoriasComboBox;
     private Pelicula pelicula;
+    private PeliculaController peliculaController;
 
     public VentanaEditarPelicula(int idPelicula, List<String> categorias) {
-        PeliculaDAOImpl peliculaDAO = new PeliculaDAOImpl(MyBatisUtil.getSqlSessionFactory());
-        this.pelicula = peliculaDAO.Buscar(idPelicula);
+        this.peliculaController = new PeliculaController();
+        this.pelicula = peliculaController.buscarPelicula(idPelicula);
         initComponents(categorias);
     }
 
     private void initComponents(List<String> categorias) {
         setTitle("Editar Película");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new GridBagLayout());
@@ -89,36 +81,59 @@ public class VentanaEditarPelicula extends JFrame {
         gbc.gridx = 1;
         gbc.gridy = 4;
         categoriasComboBox = new JComboBox<>(categorias.toArray(new String[0]));
-        int idCategoria = pelicula.getIdCategoria();
-        CategoriaDAOImpl categoriaDAO = new CategoriaDAOImpl(MyBatisUtil.getSqlSessionFactory());
-        Categoria categoria = categoriaDAO.Buscar(idCategoria);
-
-        categoriasComboBox.setSelectedItem(categoria.getNombre());
         panel.add(categoriasComboBox, gbc);
+        categoriasComboBox.setSelectedItem(obtenerNombreCategoria(pelicula.getIdCategoria()));
 
         gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         JButton guardarButton = new JButton("Guardar");
+        guardarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editarPelicula();
+            }
+        });
         panel.add(guardarButton, gbc);
 
         add(panel);
         pack();
     }
 
+    private void editarPelicula() {
+        String titulo = tituloField.getText();
+        String sinopsis = sinopsisArea.getText();
+        int duracion = Integer.parseInt(duracionField.getText());
+        String fechaEstreno = fechaEstrenoField.getText();
+        String categoria = (String) categoriasComboBox.getSelectedItem();
+
+        Pelicula peliculaEditada = new Pelicula(this.pelicula.getIdPelicula(), titulo, sinopsis, duracion, fechaEstreno, obtenerIdCategoria(categoria));
+        peliculaEditada.setIdPelicula(pelicula.getIdPelicula());
+
+        peliculaController.actualizarPelicula(peliculaEditada);
+        JOptionPane.showMessageDialog(this, "Película editada exitosamente");
+        dispose();
+    }
+
+    private String obtenerNombreCategoria(int idCategoria) {
+        CategoriaController categoriaController = new CategoriaController();
+        Categoria categoria = categoriaController.buscarCategoria(idCategoria);
+        return categoria.getNombre();
+    }
+
+    private int obtenerIdCategoria(String nombreCategoria) {
+        CategoriaController categoriaController = new CategoriaController();
+        List<Categoria> categorias = categoriaController.listarCategorias();
+        for (Categoria categoria : categorias) {
+            if (categoria.getNombre().equals(nombreCategoria)) {
+                return categoria.getIdCategoria();
+            }
+        }
+        return -1; // Categoría no encontrada
+    }
+
     public void mostrar() {
         setVisible(true);
     }
-
-    /*
-     
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            List<String> categorias = List.of("Acción", "Comedia", "Drama", "Fantasía", "Ciencia Ficción");
-            VentanaEditarPelicula ventana = new VentanaEditarPelicula(1, categorias);
-            ventana.mostrar();
-        });
-    }
-     */
 }

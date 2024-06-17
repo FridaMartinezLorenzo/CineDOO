@@ -14,11 +14,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ProyectoCinePersistencia.dao.pelicula.PeliculaDAOImpl;
-import ProyectoCinePersistencia.dao.categoria.CategoriaDAOImpl;
+import ProyectoCinePresentacion.controllers.PeliculaController;
+import ProyectoCinePresentacion.controllers.CategoriaController;
 import ProyectoCinePersistencia.entities.Pelicula;
 import ProyectoCinePersistencia.entities.Categoria;
-import ProyectoCinePersistencia.utils.MyBatisUtil;
 
 public class VentanaSeleccionarPelicula extends JFrame {
 
@@ -28,8 +27,8 @@ public class VentanaSeleccionarPelicula extends JFrame {
 
     public VentanaSeleccionarPelicula(String caso) {
         this.caso = caso;
-        PeliculaDAOImpl peliculaDAO = new PeliculaDAOImpl(MyBatisUtil.getSqlSessionFactory());
-        this.peliculas = peliculaDAO.Listar();
+        PeliculaController peliculaController = new PeliculaController();
+        this.peliculas = peliculaController.listarPeliculas();
         initComponents();
     }
 
@@ -61,8 +60,8 @@ public class VentanaSeleccionarPelicula extends JFrame {
                 if (selectedIndex >= 0 && selectedIndex < peliculas.size()) {
                     Pelicula peliculaSeleccionada = peliculas.get(selectedIndex);
                     if (caso.equals("editar")) {
-                        CategoriaDAOImpl categoriaDAO = new CategoriaDAOImpl(MyBatisUtil.getSqlSessionFactory());
-                        List<String> nombresCategorias = categoriaDAO.Listar().stream()
+                        CategoriaController categoriaController = new CategoriaController();
+                        List<String> nombresCategorias = categoriaController.listarCategorias().stream()
                                 .map(Categoria::getNombre)
                                 .collect(Collectors.toList());
                         VentanaEditarPelicula ventanaEditarPelicula = new VentanaEditarPelicula(peliculaSeleccionada.getIdPelicula(), nombresCategorias);

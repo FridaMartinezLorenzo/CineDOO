@@ -111,8 +111,14 @@ public class VentanaEditarPelicula extends JFrame {
         Pelicula peliculaEditada = new Pelicula(this.pelicula.getIdPelicula(), titulo, sinopsis, duracion, fechaEstreno, obtenerIdCategoria(categoria));
         peliculaEditada.setIdPelicula(pelicula.getIdPelicula());
 
-        peliculaController.actualizarPelicula(peliculaEditada);
-        JOptionPane.showMessageDialog(this, "Película editada exitosamente");
+        boolean exito = peliculaController.actualizarPelicula(peliculaEditada);
+        if (exito) {
+            JOptionPane.showMessageDialog(this, "Película eliminada exitosamente");
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al eliminar la película. Verifique el ID.");
+        }
+
         dispose();
     }
 

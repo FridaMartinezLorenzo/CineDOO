@@ -32,8 +32,21 @@ public class PeliculaController {
         return peliculaDAO.Buscar(id);
     }
 
-    public void actualizarPelicula(Pelicula pelicula) {
-        peliculaDAO.Actualizar(pelicula);
+    public boolean actualizarPelicula(Pelicula pelicula) {
+        // Verificamos que los campos no estén vacíos y la información sea la correcta
+        if (pelicula.getTitulo().isEmpty() || pelicula.getSinopsis().isEmpty() || pelicula.getFechaEstreno().isEmpty() || pelicula.getDuracion() == 0) {
+            pelicula.setIdPelicula(-1);
+            return false;
+        } else {
+            // Puedes llamar a métodos de PeliculaDAO para buscar la película por título u otro criterio
+            if (peliculaDAO.BuscarPorTitulo(pelicula.getTitulo()) != null) {
+                // Si la película ya existe, entonces retornamos la película con un ID negativo
+                pelicula.setIdPelicula(-1);
+                return false;
+            }
+            peliculaDAO.Actualizar(pelicula);
+            return true;
+        }
     }
 
     public boolean eliminarPelicula(int id) {

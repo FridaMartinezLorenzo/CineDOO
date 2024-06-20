@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProyectoCinePersistencia.db.mappers.FuncionMapper">
+
+    <resultMap id="FuncionResultMap" type="ProyectoCinePersistencia.entities.Funcion">
+        <id property="IdFuncion" column="IdFuncion"/>
+        <association property="pelicula" column="IdPelicula" javaType="ProyectoCinePersistencia.entities.Pelicula" select="ProyectoCinePersistencia.db.mappers.PeliculaMapper.buscarPelicula"/>
+        <association property="horario" column="IdHorario" javaType="ProyectoCinePersistencia.entities.Horario" select="ProyectoCinePersistencia.db.mappers.HorarioMapper.buscarHorario"/>
+        <association property="sala" column="IdSala" javaType="ProyectoCinePersistencia.entities.Sala" select="ProyectoCinePersistencia.db.mappers.SalaMapper.buscarSala"/>
+    </resultMap>
+
+    <select id="getFuncionById" resultMap="FuncionResultMap">
+        SELECT * FROM funciones WHERE IdFuncion = #{id}
+    </select>
+
+    <select id="getAllFunciones" resultMap="FuncionResultMap">
+        SELECT * FROM funciones
+    </select>
+
+    <insert id="insertFuncion" useGeneratedKeys="true" keyProperty="IdFuncion">
+        INSERT INTO funciones(IdPelicula, IdHorario, IdSala) VALUES(#{pelicula.IdPelicula}, #{horario.IdHorario}, #{sala.IdSala})
+    </insert>
+
+    <update id="updateFuncion">
+        UPDATE funciones SET IdPelicula = #{pelicula.IdPelicula}, IdHorario = #{horario.IdHorario}, IdSala = #{sala.IdSala} WHERE IdFuncion = #{IdFuncion}
+    </update>
+
+    <delete id="deleteFuncion">
+        DELETE FROM funciones WHERE IdFuncion = #{id}
+    </delete>
+
+</mapper>

@@ -12,18 +12,15 @@ public class PeliculaController {
     private PeliculaDAO peliculaDAO = new PeliculaDAOImpl(ViewUtil.getSqlSessionFactory());
 
     public Pelicula crearPelicula(Pelicula pelicula) {
-        // Verificamos que los campos no estén vacíos y la información sea la correcta
-        if (pelicula.getTitulo().isEmpty() || pelicula.getSinopsis().isEmpty() || pelicula.getFechaEstreno().isEmpty() || pelicula.getDuracion() == 0) {
+        if (pelicula.getTitulo().isEmpty() || pelicula.getSinopsis().isEmpty() || pelicula.getFechaEstreno().isEmpty() || pelicula.getDuracion() <= 0) {
+            System.err.println("Error: Campos vacíos o información incorrecta");
             pelicula.setIdPelicula(-1);
             return pelicula;
         } else {
-            // Puedes llamar a métodos de PeliculaDAO para buscar la película por título u otro criterio
             if (peliculaDAO.BuscarPorTitulo(pelicula.getTitulo()) != null) {
-                // Si la película ya existe, entonces retornamos la película con un ID negativo
                 pelicula.setIdPelicula(-1);
                 return pelicula;
             }
-            // Si la película no existe, entonces procedemos a crearla
             return peliculaDAO.Crear(pelicula);
         }
     }

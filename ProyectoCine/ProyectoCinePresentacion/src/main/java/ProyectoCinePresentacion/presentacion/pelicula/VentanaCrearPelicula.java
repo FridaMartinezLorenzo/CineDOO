@@ -99,11 +99,29 @@ public class VentanaCrearPelicula extends JFrame {
     }
 
     private void crearPelicula() {
-        String titulo = tituloField.getText();
-        String sinopsis = sinopsisArea.getText();
-        int duracion = Integer.parseInt(duracionField.getText());
-        String fechaEstreno = fechaEstrenoField.getText();
+        String titulo = tituloField.getText().trim();
+        String sinopsis = sinopsisArea.getText().trim();
+        String duracionText = duracionField.getText().trim();
+        String fechaEstreno = fechaEstrenoField.getText().trim();
         String categoria = (String) categoriasComboBox.getSelectedItem();
+
+        if (titulo.isEmpty() || sinopsis.isEmpty() || duracionText.isEmpty() || fechaEstreno.isEmpty() || categoria == null) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int duracion;
+        try {
+            duracion = Integer.parseInt(duracionText);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "La duración debe ser un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (duracion <= 0) {
+            JOptionPane.showMessageDialog(this, "La duración debe ser mayor que cero.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         Pelicula nuevaPelicula = new Pelicula(0, titulo, sinopsis, duracion, fechaEstreno, obtenerIdCategoria(categoria));
         Pelicula peliculaCreada = peliculaController.crearPelicula(nuevaPelicula);

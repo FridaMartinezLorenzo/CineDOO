@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProyectoCinePersistencia.db.mappers.SalaMapper">
+<<<<<<< HEAD:ProyectoCine/src/main/java/ProyectoCinePersistencia/db/mappers/SalaMapper.xml
+        
+    <resultMap id="salaResultMap" type="Sala">
+=======
+
+    <resultMap id="salaResultMap" type="ProyectoCinePersistencia.entities.Sala">
+>>>>>>> main:ProyectoCine/ProyectoCinePersistencia/src/main/java/ProyectoCinePersistencia/db/mappers/SalaMapper.xml
+        <id property="IdSala" column="IdSala"/>
+        <result property="NumAsiento" column="NumAsiento"/>
+    </resultMap>
+
+<<<<<<< HEAD:ProyectoCine/src/main/java/ProyectoCinePersistencia/db/mappers/SalaMapper.xml
+    <insert id="insertarSala" parameterType="ProyectoCinePersistencia.entities.Sala" useGeneratedKeys="true" keyProperty="idSala">
+        INSERT INTO salas (NumAsiento)
+        VALUES (#{numAsiento})
+    </insert>
+
+    <select id="buscarSala" parameterType="int" resultType="Sala">
+        SELECT * FROM salas WHERE IdSala = #{id}
+    </select>
+
+    <update id="actualizarSala" parameterType="Sala">
+        UPDATE salas SET NumAsiento = #{numAsiento}
+        WHERE IdSala = #{idSala}
+=======
+    <insert id="insertarSala" parameterType="ProyectoCinePersistencia.entities.Sala" useGeneratedKeys="true" keyProperty="IdSala">
+        INSERT INTO salas (NumAsiento)
+        VALUES (#{NumAsiento})
+    </insert>
+
+    <select id="buscarSala" parameterType="int" resultMap="salaResultMap">
+        SELECT * FROM salas WHERE IdSala = #{id}
+    </select>
+
+    <update id="actualizarSala" parameterType="ProyectoCinePersistencia.entities.Sala">
+        UPDATE salas SET NumAsiento = #{NumAsiento}
+        WHERE IdSala = #{IdSala}
+>>>>>>> main:ProyectoCine/ProyectoCinePersistencia/src/main/java/ProyectoCinePersistencia/db/mappers/SalaMapper.xml
+    </update>
+
+    <delete id="eliminarSala" parameterType="int">
+        DELETE FROM salas WHERE IdSala = #{id}
+    </delete>
+
+<<<<<<< HEAD:ProyectoCine/src/main/java/ProyectoCinePersistencia/db/mappers/SalaMapper.xml
+    <select id="listarSalas" resultType="Sala">
+        SELECT * FROM salas
+    </select>
+</mapper>
+=======
+    <select id="listarSalas" resultMap="salaResultMap">
+        SELECT * FROM salas
+    </select>
+
+</mapper>
+>>>>>>> main:ProyectoCine/ProyectoCinePersistencia/src/main/java/ProyectoCinePersistencia/db/mappers/SalaMapper.xml

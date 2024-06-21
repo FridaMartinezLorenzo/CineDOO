@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import ProyectoCinePersistencia.db.mappers.FuncionMapper;
 import ProyectoCinePersistencia.entities.Funcion;
+import ProyectoCinePersistencia.utils.MyBatisUtil;
 
 public class FuncionDAOImpl implements FuncionDAO {
 
@@ -57,6 +58,24 @@ public class FuncionDAOImpl implements FuncionDAO {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             FuncionMapper mapper = session.getMapper(FuncionMapper.class);
             return mapper.getAllFunciones();
+        }
+    }
+
+    @Override
+    public List<Funcion> ListarPorPelicula(int idPelicula) {
+        try (SqlSession session = sqlSessionFactory.openSession()) {
+            FuncionMapper mapper = session.getMapper(FuncionMapper.class);
+            return mapper.getFuncionesByPelicula(idPelicula);
+        }
+    }
+
+    @Override
+    public int BoletosDisponibles(int idFuncion) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            FuncionMapper mapper = session.getMapper(FuncionMapper.class);
+            int numAsientosVendidos = mapper.getNumAsientosVendidos(idFuncion);
+            int numAsientosTotales = mapper.getNumAsientosTotales(idFuncion);
+            return numAsientosTotales - numAsientosVendidos;
         }
     }
 }

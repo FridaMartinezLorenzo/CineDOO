@@ -10,9 +10,15 @@ public interface FuncionMapper {
 
     List<Funcion> getAllFunciones();
 
+    List<Funcion> getFuncionesByPelicula(int idPelicula);
+
     void insertFuncion(Funcion funcion);
 
     void updateFuncion(Funcion funcion);
 
     void deleteFuncion(int id);
+
+    int getNumAsientosVendidos(int idFuncion);
+
+    int getNumAsientosTotales(int idFuncion);
 }

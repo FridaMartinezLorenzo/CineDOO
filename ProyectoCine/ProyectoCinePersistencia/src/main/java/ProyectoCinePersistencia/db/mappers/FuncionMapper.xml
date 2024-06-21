@@ -20,6 +20,10 @@
         SELECT * FROM funciones
     </select>
 
+    <select id="getFuncionesByPelicula" resultMap="FuncionResultMap">
+        SELECT * FROM funciones WHERE IdPelicula = #{id}
+    </select>
+
     <insert id="insertFuncion" useGeneratedKeys="true" keyProperty="IdFuncion">
         INSERT INTO funciones(IdPelicula, IdHorario, IdSala) VALUES(#{pelicula.IdPelicula}, #{horario.IdHorario}, #{sala.IdSala})
     </insert>
@@ -31,5 +35,21 @@
     <delete id="deleteFuncion">
         DELETE FROM funciones WHERE IdFuncion = #{id}
     </delete>
+
+    <!-- Consulta para obtener el número de asientos vendidos -->
+    <select id="getNumAsientosVendidos" resultType="int" parameterType="int">
+        SELECT COUNT(*) 
+        FROM ventas 
+        WHERE IdFuncion = #{id};
+    </select>
+
+    <!-- Consulta para obtener el número de asientos totales de la sala -->
+    <select id="getNumAsientosTotales" resultType="int" parameterType="int">
+        SELECT salas.NumAsiento 
+        FROM funciones, salas 
+        WHERE funciones.IdSala = salas.IdSala 
+          AND funciones.IdFuncion = #{id};
+    </select>
+
 
 </mapper>

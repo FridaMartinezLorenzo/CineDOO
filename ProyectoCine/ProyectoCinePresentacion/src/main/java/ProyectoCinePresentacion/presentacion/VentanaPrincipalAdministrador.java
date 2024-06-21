@@ -17,6 +17,7 @@ import ProyectoCinePersistencia.utils.MyBatisUtil;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaCrearPelicula;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaListarPeliculas;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaSeleccionarPelicula;
+import ProyectoCinePresentacion.presentacion.venta.VentanaCrearVenta; // Importa VentanaCrearVenta
 
 public class VentanaPrincipalAdministrador extends JFrame {
 
@@ -94,7 +95,7 @@ public class VentanaPrincipalAdministrador extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Acción a realizar cuando se selecciona el ítem del menú
-                //JOptionPane.showMessageDialog(VentanaPrincipalAdministrador.this, "Seleccionaste: " + name);
+                // JOptionPane.showMessageDialog(VentanaPrincipalAdministrador.this, "Seleccionaste: " + name);
 
                 // Hacemos el precargado de los datos que podrían ser necesarios
                 CategoriaDAOImpl categoriaDAO = new CategoriaDAOImpl(MyBatisUtil.getSqlSessionFactory());
@@ -175,7 +176,8 @@ public class VentanaPrincipalAdministrador extends JFrame {
                         // Eliminar Usuario
                         break;
                     case "Crear Venta":
-                        // Crear Venta
+                        VentanaCrearVenta ventanaCrearVenta = new VentanaCrearVenta();
+                        ventanaCrearVenta.mostrar();
                         break;
                     case "Eliminar Venta":
                         // Eliminar Venta

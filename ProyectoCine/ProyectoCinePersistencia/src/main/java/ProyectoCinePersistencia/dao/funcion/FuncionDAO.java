@@ -15,4 +15,8 @@ public interface FuncionDAO {
     void Eliminar(int id);
 
     List<Funcion> Listar();
+
+    List<Funcion> ListarPorPelicula(int idPelicula);
+
+    int BoletosDisponibles(int idFuncion);
 }

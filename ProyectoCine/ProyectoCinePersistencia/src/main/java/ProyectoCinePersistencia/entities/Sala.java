@@ -1,10 +1,6 @@
 package ProyectoCinePersistencia.entities;
 
 public class Sala {
-<<<<<<< HEAD:ProyectoCine/src/main/java/ProyectoCinePersistencia/entities/Sala.java
-=======
-
->>>>>>> main:ProyectoCine/ProyectoCinePersistencia/src/main/java/ProyectoCinePersistencia/entities/Sala.java
     // Atributos
     private int IdSala;
     private int NumAsiento;

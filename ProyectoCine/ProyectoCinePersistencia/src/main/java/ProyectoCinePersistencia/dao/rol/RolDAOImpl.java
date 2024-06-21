@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import ProyectoCinePersistencia.db.mappers.RolMapper;
 import ProyectoCinePersistencia.entities.Rol;
 
-public class RolDAOImpl {
+public class RolDAOImpl implements RolDAO {
 
     private SqlSessionFactory sqlSessionFactory;
 

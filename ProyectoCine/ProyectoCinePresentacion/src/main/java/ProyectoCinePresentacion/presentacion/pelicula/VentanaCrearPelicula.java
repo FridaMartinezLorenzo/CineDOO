@@ -105,7 +105,8 @@ public class VentanaCrearPelicula extends JFrame {
         String fechaEstreno = fechaEstrenoField.getText();
         String categoria = (String) categoriasComboBox.getSelectedItem();
 
-        Pelicula nuevaPelicula = new Pelicula(0, titulo, sinopsis, duracion, fechaEstreno, obtenerIdCategoria(categoria));
+        Pelicula nuevaPelicula = new Pelicula(0, titulo, sinopsis, duracion, fechaEstreno,
+                obtenerIdCategoria(categoria));
         Pelicula peliculaCreada = peliculaController.crearPelicula(nuevaPelicula);
 
         if (peliculaCreada.getIdPelicula() != -1) {

@@ -64,10 +64,12 @@ public class VentanaSeleccionarPelicula extends JFrame {
                         List<String> nombresCategorias = categoriaController.listarCategorias().stream()
                                 .map(Categoria::getNombre)
                                 .collect(Collectors.toList());
-                        VentanaEditarPelicula ventanaEditarPelicula = new VentanaEditarPelicula(peliculaSeleccionada.getIdPelicula(), nombresCategorias);
+                        VentanaEditarPelicula ventanaEditarPelicula = new VentanaEditarPelicula(
+                                peliculaSeleccionada.getIdPelicula(), nombresCategorias);
                         ventanaEditarPelicula.mostrar();
                     } else if (caso.equals("buscar")) {
-                        VentanaBuscarPelicula ventanaBuscarPelicula = new VentanaBuscarPelicula(peliculaSeleccionada.getIdPelicula());
+                        VentanaBuscarPelicula ventanaBuscarPelicula = new VentanaBuscarPelicula(
+                                peliculaSeleccionada.getIdPelicula());
                         ventanaBuscarPelicula.mostrar();
                     }
                     dispose();

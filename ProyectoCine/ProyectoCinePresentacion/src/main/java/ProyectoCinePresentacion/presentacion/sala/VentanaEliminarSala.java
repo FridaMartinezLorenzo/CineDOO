@@ -1,24 +1,24 @@
-package ProyectoCinePresentacion.presentacion.pelicula;
+package ProyectoCinePresentacion.presentacion.sala;
 
-import ProyectoCinePresentacion.controllers.PeliculaController;
+import ProyectoCinePresentacion.controllers.SalaController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VentanaEliminarPelicula extends JFrame {
+public class VentanaEliminarSala extends JFrame {
+    
+    private JTextField idSalaField;
+    private SalaController salaController;
 
-    private JTextField idPeliculaField;
-    private PeliculaController peliculaController;
-
-    public VentanaEliminarPelicula() {
-        this.peliculaController = new PeliculaController();
+    public VentanaEliminarSala() {
+        this.salaController = new SalaController();
         initComponents();
     }
 
     private void initComponents() {
-        setTitle("Eliminar Película");
+        setTitle("Eliminar Sala");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -29,12 +29,12 @@ public class VentanaEliminarPelicula extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        panel.add(new JLabel("ID de la Película:"), gbc);
+        panel.add(new JLabel("ID de la Sala:"), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        idPeliculaField = new JTextField(10);
-        panel.add(idPeliculaField, gbc);
+        idSalaField = new JTextField(10);
+        panel.add(idSalaField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -44,7 +44,7 @@ public class VentanaEliminarPelicula extends JFrame {
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                eliminarPelicula();
+                eliminarSala();
             }
         });
         panel.add(eliminarButton, gbc);
@@ -53,15 +53,15 @@ public class VentanaEliminarPelicula extends JFrame {
         pack();
     }
 
-    private void eliminarPelicula() {
-        int idPelicula = Integer.parseInt(idPeliculaField.getText());
-        boolean exito = peliculaController.eliminarPelicula(idPelicula);
+    private void eliminarSala() {
+        int idSala = Integer.parseInt(idSalaField.getText());
+        boolean exito = salaController.eliminarSala(idSala);
 
         if (exito) {
-            JOptionPane.showMessageDialog(this, "Película eliminada exitosamente");
+            JOptionPane.showMessageDialog(this, "Sala eliminada correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             dispose();//cierra la ventana
         } else {
-            JOptionPane.showMessageDialog(this, "Error al eliminar la película. Verifique el ID.");
+            JOptionPane.showMessageDialog(this, "No se pudo eliminar la sala", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 

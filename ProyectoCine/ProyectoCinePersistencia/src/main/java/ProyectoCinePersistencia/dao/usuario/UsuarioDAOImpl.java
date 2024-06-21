@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import ProyectoCinePersistencia.db.mappers.UsuarioMapper;
 import ProyectoCinePersistencia.entities.Usuario;
 
-public class UsuarioDAOImpl {
+public class UsuarioDAOImpl implements UsuarioDAO {
 
     private final SqlSessionFactory sqlSessionFactory;
 

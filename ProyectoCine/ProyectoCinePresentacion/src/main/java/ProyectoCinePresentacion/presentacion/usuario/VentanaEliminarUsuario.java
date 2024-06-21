@@ -1,24 +1,24 @@
-package ProyectoCinePresentacion.presentacion.pelicula;
+package ProyectoCinePresentacion.presentacion.usuario;
 
-import ProyectoCinePresentacion.controllers.PeliculaController;
+import ProyectoCinePresentacion.controllers.UsuarioController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VentanaEliminarPelicula extends JFrame {
+public class VentanaEliminarUsuario extends JFrame {
 
-    private JTextField idPeliculaField;
-    private PeliculaController peliculaController;
+    private JTextField idUsuarioField;
+    private UsuarioController usuarioController;
 
-    public VentanaEliminarPelicula() {
-        this.peliculaController = new PeliculaController();
+    public VentanaEliminarUsuario() {
+        this.usuarioController = new UsuarioController();
         initComponents();
     }
 
     private void initComponents() {
-        setTitle("Eliminar Película");
+        setTitle("Eliminar Usuario");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -29,12 +29,12 @@ public class VentanaEliminarPelicula extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        panel.add(new JLabel("ID de la Película:"), gbc);
+        panel.add(new JLabel("ID del Usuario:"), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        idPeliculaField = new JTextField(10);
-        panel.add(idPeliculaField, gbc);
+        idUsuarioField = new JTextField(10);
+        panel.add(idUsuarioField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -44,7 +44,7 @@ public class VentanaEliminarPelicula extends JFrame {
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                eliminarPelicula();
+                eliminarUsuario();
             }
         });
         panel.add(eliminarButton, gbc);
@@ -53,15 +53,16 @@ public class VentanaEliminarPelicula extends JFrame {
         pack();
     }
 
-    private void eliminarPelicula() {
-        int idPelicula = Integer.parseInt(idPeliculaField.getText());
-        boolean exito = peliculaController.eliminarPelicula(idPelicula);
+    private void eliminarUsuario() {
+        int idUsuario = Integer.parseInt(idUsuarioField.getText());
+        boolean exito = usuarioController.eliminarUsuario(idUsuario);
 
         if (exito) {
-            JOptionPane.showMessageDialog(this, "Película eliminada exitosamente");
-            dispose();//cierra la ventana
+            JOptionPane.showMessageDialog(this, "Usuario eliminado correctamente", "Éxito",
+                    JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Error al eliminar la película. Verifique el ID.");
+            JOptionPane.showMessageDialog(this, "No se ha podido eliminar el usuario", "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 

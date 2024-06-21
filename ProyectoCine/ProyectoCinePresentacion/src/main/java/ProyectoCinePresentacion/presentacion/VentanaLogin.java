@@ -87,7 +87,7 @@ public class VentanaLogin extends JFrame {
                         VentanaPrincipalEmpleado ventanaPrincipalEmpleado = new VentanaPrincipalEmpleado();
                         ventanaPrincipalEmpleado.mostrar();
                     }
-                    setVisible(false);
+                    //setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(VentanaLogin.this, "Credenciales incorrectas");
                 }

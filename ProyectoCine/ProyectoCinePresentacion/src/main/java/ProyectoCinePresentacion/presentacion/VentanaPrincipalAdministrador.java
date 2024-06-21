@@ -11,12 +11,25 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import ProyectoCinePersistencia.dao.rol.RolDAOImpl;
+import ProyectoCinePersistencia.entities.Rol;
+
 import ProyectoCinePersistencia.dao.categoria.CategoriaDAOImpl;
 import ProyectoCinePersistencia.entities.Categoria;
 import ProyectoCinePersistencia.utils.MyBatisUtil;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaCrearPelicula;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaListarPeliculas;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaSeleccionarPelicula;
+
+import ProyectoCinePresentacion.presentacion.sala.VentanaCrearSala;
+import ProyectoCinePresentacion.presentacion.sala.VentanaEliminarSala;
+import ProyectoCinePresentacion.presentacion.sala.VentanaSeleccionarSala;
+import ProyectoCinePresentacion.presentacion.sala.VentanaListarSalas;
+
+import ProyectoCinePresentacion.presentacion.usuario.VentanaCrearUsuario;
+import ProyectoCinePresentacion.presentacion.usuario.VentanaEliminarUsuario;
+import ProyectoCinePresentacion.presentacion.usuario.VentanaListarUsuario;
+import ProyectoCinePresentacion.presentacion.usuario.VentanaSeleccionarUsuario;
 
 public class VentanaPrincipalAdministrador extends JFrame {
 
@@ -94,13 +107,20 @@ public class VentanaPrincipalAdministrador extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Acción a realizar cuando se selecciona el ítem del menú
-                //JOptionPane.showMessageDialog(VentanaPrincipalAdministrador.this, "Seleccionaste: " + name);
+                // JOptionPane.showMessageDialog(VentanaPrincipalAdministrador.this,
+                // "Seleccionaste: " + name);
 
                 // Hacemos el precargado de los datos que podrían ser necesarios
                 CategoriaDAOImpl categoriaDAO = new CategoriaDAOImpl(MyBatisUtil.getSqlSessionFactory());
                 List<Categoria> categorias = categoriaDAO.Listar();
                 List<String> nombresCategorias = categorias.stream()
                         .map(Categoria::getNombre)
+                        .collect(Collectors.toList());
+
+                RolDAOImpl rolDAO = new RolDAOImpl(MyBatisUtil.getSqlSessionFactory());
+                List<Rol> roles = rolDAO.Listar();
+                List<String> nombresRoles = roles.stream()
+                        .map(Rol::getNombre)
                         .collect(Collectors.toList());
 
                 switch (name) {
@@ -113,11 +133,13 @@ public class VentanaPrincipalAdministrador extends JFrame {
                         ventanaListarPeliculas.mostrar();
                         break;
                     case "Actualizar Película":
-                        VentanaSeleccionarPelicula ventanaSeleccionarPeliculaEditar = new VentanaSeleccionarPelicula("editar");
+                        VentanaSeleccionarPelicula ventanaSeleccionarPeliculaEditar = new VentanaSeleccionarPelicula(
+                                "editar");
                         ventanaSeleccionarPeliculaEditar.mostrar();
                         break;
                     case "Buscar Película":
-                        VentanaSeleccionarPelicula ventanaSeleccionarPeliculaBuscar = new VentanaSeleccionarPelicula("buscar");
+                        VentanaSeleccionarPelicula ventanaSeleccionarPeliculaBuscar = new VentanaSeleccionarPelicula(
+                                "buscar");
                         ventanaSeleccionarPeliculaBuscar.mostrar();
                         break;
                     case "Eliminar Película":
@@ -151,27 +173,44 @@ public class VentanaPrincipalAdministrador extends JFrame {
                         // Eliminar Promoción
                         break;
                     case "Crear Sala":
+                        VentanaCrearSala ventanaCrearSala = new VentanaCrearSala();
+                        ventanaCrearSala.mostrar();
                         // Crear Sala
                         break;
                     case "Listar Salas":
+                        VentanaListarSalas ventanaListarSalas = new VentanaListarSalas();
+                        ventanaListarSalas.mostrar();
                         // Listar Salas
                         break;
                     case "Actualizar Sala":
+                        VentanaSeleccionarSala ventanaSeleccionarSalaActualizar = new VentanaSeleccionarSala("editar");
+                        ventanaSeleccionarSalaActualizar.mostrar();
                         // Actualizar Sala
                         break;
                     case "Eliminar Sala":
+                        VentanaEliminarSala ventanaEliminarSala = new VentanaEliminarSala();
+                        ventanaEliminarSala.mostrar();
                         // Eliminar Sala
                         break;
                     case "Crear Usuario":
+                        VentanaCrearUsuario ventanaCrearUsuario = new VentanaCrearUsuario(nombresRoles);
+                        ventanaCrearUsuario.mostrar();
                         // Crear Usuario
                         break;
                     case "Listar Usuarios":
+                        VentanaListarUsuario ventanaListarUsuario = new VentanaListarUsuario();
+                        ventanaListarUsuario.mostrar();
                         // Listar Usuarios
                         break;
                     case "Actualizar Usuario":
+                        VentanaSeleccionarUsuario ventanaSeleccionarUsuarioActualizar = new VentanaSeleccionarUsuario(
+                                "editar");
+                        ventanaSeleccionarUsuarioActualizar.mostrar();
                         // Actualizar Usuario
                         break;
                     case "Eliminar Usuario":
+                        VentanaEliminarUsuario ventanaEliminarUsuario = new VentanaEliminarUsuario();
+                        ventanaEliminarUsuario.mostrar();
                         // Eliminar Usuario
                         break;
                     case "Crear Venta":
@@ -193,14 +232,15 @@ public class VentanaPrincipalAdministrador extends JFrame {
     }
 
     /*
-
-     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new VentanaPrincipalAdministrador().setVisible(true);
-            }
-        });
-    }
+     * 
+     * public static void main(String[] args) {
+     * SwingUtilities.invokeLater(new Runnable() {
+     * 
+     * @Override
+     * public void run() {
+     * new VentanaPrincipalAdministrador().setVisible(true);
+     * }
+     * });
+     * }
      */
 }

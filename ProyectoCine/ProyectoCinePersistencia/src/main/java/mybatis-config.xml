@@ -12,7 +12,8 @@
         <typeAlias alias="Promocion" type="ProyectoCinePersistencia.entities.Promocion"/>
         <typeAlias alias="Usuario" type="ProyectoCinePersistencia.entities.Usuario"/>
         <typeAlias alias="Ganancia" type="ProyectoCinePersistencia.entities.Rol"/>
-        <typeAlias alias="Login" type="ProyectoCinePersistencia.entities.Funcion"/>
+        <typeAlias alias="Funcion" type="ProyectoCinePersistencia.entities.Funcion"/>
+        <typeAlias alias="Boleto" type="ProyectoCinePersistencia.entities.Boleto"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -38,5 +39,6 @@
         <mapper resource="ProyectoCinePersistencia/db/mappers/RolMapper.xml"/>
         <mapper resource="ProyectoCinePersistencia/db/mappers/SalaMapper.xml"/>
         <mapper resource="ProyectoCinePersistencia/db/mappers/FuncionMapper.xml"/>
+        <mapper resource="ProyectoCinePersistencia/db/mappers/BoletoMapper.xml"/>
     </mappers>
 </configuration>

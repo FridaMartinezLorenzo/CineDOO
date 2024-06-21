@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="BoletoMapper">
+<mapper namespace="ProyectoCinePersistencia.db.mappers.BoletoMapper">
     <resultMap id="BoletoResultMap" type="ProyectoCinePersistencia.entities.Boleto">
         <id property="IdTipoBoleto" column="IdTipoBoleto"/>
         <result property="Nombre" column="Nombre"/>
@@ -11,25 +11,26 @@
     </resultMap>
 
     <select id="listarTodos" resultMap="BoletoResultMap">
-        SELECT * FROM Boleto
+        SELECT * FROM tipo_boleto
     </select>
 
     <select id="obtenerPorId" parameterType="int" resultMap="BoletoResultMap">
-        SELECT * FROM Boleto WHERE IdTipoBoleto = #{id}
+        SELECT * FROM tipo_boleto WHERE IdTipoBoleto = #{id}
     </select>
 
-    <insert id="insertar" parameterType="ProyectoCinePersistencia.entities.Boleto">
-        INSERT INTO Boleto (Nombre, Precio)
+    <insert id="insertar" parameterType="ProyectoCinePersistencia.entities.Boleto"  useGeneratedKeys="true" keyProperty="IdTipoBoleto">
+        INSERT INTO tipo_boleto (Nombre, Precio)
         VALUES (#{Nombre}, #{Precio})
     </insert>
 
+
     <update id="actualizar" parameterType="ProyectoCinePersistencia.entities.Boleto">
-        UPDATE Boleto
+        UPDATE tipo_boleto
         SET Nombre = #{Nombre}, Precio = #{Precio}
         WHERE IdTipoBoleto = #{IdTipoBoleto}
     </update>
 
     <delete id="eliminar" parameterType="int">
-        DELETE FROM Boleto WHERE IdTipoBoleto = #{id}
+        DELETE FROM tipo_boleto WHERE IdTipoBoleto = #{id}
     </delete>
 </mapper>

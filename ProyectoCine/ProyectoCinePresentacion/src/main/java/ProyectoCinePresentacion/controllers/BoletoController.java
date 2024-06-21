@@ -16,22 +16,28 @@ public class BoletoController {
     }
 
     public List<Boleto> listarBoletos() {
-        return boletoDAO.listarTodos();
+        return boletoDAO.Listar();
     }
 
     public Boleto obtenerBoletoPorId(int id) {
-        return boletoDAO.obtenerPorId(id);
+        return boletoDAO.Buscar(id);
     }
 
     public void agregarBoleto(Boleto boleto) {
-        boletoDAO.insertar(boleto);
+        boletoDAO.Crear(boleto);
     }
 
     public void actualizarBoleto(Boleto boleto) {
-        boletoDAO.actualizar(boleto);
+        boletoDAO.Actualizar(boleto);
     }
 
     public void eliminarBoleto(int id) {
-        boletoDAO.eliminar(id);
+        boletoDAO.Eliminar(id);
     }
+
+    public double calcularTotal(int IdTipoBoleto, int cantidadBoletos) {
+        Boleto boleto = obtenerBoletoPorId(IdTipoBoleto);
+        return boleto.getPrecio() * cantidadBoletos;
+    }
+
 }

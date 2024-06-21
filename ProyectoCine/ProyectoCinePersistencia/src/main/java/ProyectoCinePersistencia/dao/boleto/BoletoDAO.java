@@ -6,13 +6,14 @@ import ProyectoCinePersistencia.entities.Boleto;
 
 public interface BoletoDAO {
 
-    List<Boleto> listarTodos();
+    List<Boleto> Listar();
 
-    Boleto obtenerPorId(int id);
+    Boleto Buscar(int id);
 
-    void insertar(Boleto boleto);
+    void Crear(Boleto boleto);
 
-    void actualizar(Boleto boleto);
+    void Actualizar(Boleto boleto);
 
-    void eliminar(int id);
+    void Eliminar(int id);
+
 }

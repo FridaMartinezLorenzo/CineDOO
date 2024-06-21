@@ -18,8 +18,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import ProyectoCinePersistencia.entities.Boleto;
 import ProyectoCinePersistencia.entities.Funcion;
 import ProyectoCinePersistencia.entities.Pelicula;
+import ProyectoCinePresentacion.controllers.BoletoController;
 import ProyectoCinePresentacion.controllers.FuncionController;
 import ProyectoCinePresentacion.controllers.PeliculaController;
 
@@ -27,23 +29,29 @@ public class VentanaCrearVenta extends JFrame {
 
     private JComboBox<String> peliculasComboBox;
     private JComboBox<String> horariosComboBox;
+    private JComboBox<String> tipoBoletoComboBox;
     private JTextField cantidadBoletosField;
     private JLabel boletosDisponiblesLabel;
+    private JLabel totalLabel;
     private List<Pelicula> peliculas;
     private List<Funcion> funciones;
+    private List<Boleto> boletos;
     private PeliculaController peliculaController;
     private FuncionController funcionController;
+    private BoletoController boletoController;
 
     public VentanaCrearVenta() {
         this.peliculaController = new PeliculaController();
         this.funcionController = new FuncionController();
+        this.boletoController = new BoletoController();
         this.peliculas = peliculaController.listarPeliculas();
+        this.boletos = boletoController.listarBoletos();
         initComponents();
     }
 
     private void initComponents() {
         setTitle("Crear Venta");
-        setSize(400, 200);
+        setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -79,25 +87,46 @@ public class VentanaCrearVenta extends JFrame {
         horariosComboBox = new JComboBox<>();
         panel.add(horariosComboBox, gbc);
 
-        // Cantidad de Boletos
+        // Tipo de Boleto
         gbc.gridx = 0;
         gbc.gridy = 2;
-        panel.add(new JLabel("Cantidad de Boletos:"), gbc);
+        panel.add(new JLabel("Tipo de Boleto:"), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 2;
+        String[] tiposBoletos = boletos.stream().map(Boleto::getNombre).toArray(String[]::new);
+        tipoBoletoComboBox = new JComboBox<>(tiposBoletos);
+        panel.add(tipoBoletoComboBox, gbc);
+
+        // Cantidad de Boletos
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        panel.add(new JLabel("Cantidad de Boletos:"), gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 3;
         cantidadBoletosField = new JTextField(5);
         panel.add(cantidadBoletosField, gbc);
 
         // Boletos Disponibles
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         panel.add(new JLabel("Boletos Disponibles:"), gbc);
 
         gbc.gridx = 1;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         boletosDisponiblesLabel = new JLabel();
         panel.add(boletosDisponiblesLabel, gbc);
+
+        // Total
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        panel.add(new JLabel("Total:"), gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        totalLabel = new JLabel();
+        panel.add(totalLabel, gbc);
 
         // Botón Aceptar
         JButton aceptarButton = new JButton("Aceptar");
@@ -109,7 +138,7 @@ public class VentanaCrearVenta extends JFrame {
         });
 
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 6;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         panel.add(aceptarButton, gbc);
@@ -164,10 +193,12 @@ public class VentanaCrearVenta extends JFrame {
     private void aceptarVenta() {
         int selectedIndexPelicula = peliculasComboBox.getSelectedIndex();
         int selectedIndexHorario = horariosComboBox.getSelectedIndex();
+        int selectedIndexTipoBoleto = tipoBoletoComboBox.getSelectedIndex();
         String cantidadBoletosText = cantidadBoletosField.getText();
 
         if (selectedIndexPelicula >= 0 && selectedIndexPelicula < peliculas.size()
                 && selectedIndexHorario >= 0 && selectedIndexHorario < funciones.size()
+                && selectedIndexTipoBoleto >= 0 && selectedIndexTipoBoleto < boletos.size()
                 && !cantidadBoletosText.isEmpty()) {
 
             try {
@@ -175,6 +206,7 @@ public class VentanaCrearVenta extends JFrame {
                 if (cantidadBoletos > 0) {
                     Pelicula peliculaSeleccionada = peliculas.get(selectedIndexPelicula);
                     Funcion funcionSeleccionada = funciones.get(selectedIndexHorario);
+                    Boleto boletoSeleccionado = boletos.get(selectedIndexTipoBoleto);
 
                     // Verificación de disponibilidad de boletos
                     int asientosDisponibles = funcionController.boletosDisponibles(funcionSeleccionada.getIdFuncion());
@@ -183,12 +215,18 @@ public class VentanaCrearVenta extends JFrame {
                                 + "Entradas disponibles: " + asientosDisponibles + "\n"
                                 + "Por favor, intente con otra función o ingrese una cantidad menor de entradas.");
                     } else {
+                        // Calcular total
+                        double total = boletoController.calcularTotal(boletoSeleccionado.getIdTipoBoleto(), cantidadBoletos);
+                        totalLabel.setText(String.format("%.2f", total));
+
                         // Aquí puedes manejar la creación de la venta con la información obtenida
                         JOptionPane.showMessageDialog(this, "Venta creada exitosamente:\n"
                                 + "Película: " + peliculaSeleccionada.getTitulo() + "\n"
                                 + "Horario: " + funcionSeleccionada.getHorario().getHoraInicio() + "\n"
+                                + "Tipo de Boleto: " + boletoSeleccionado.getNombre() + "\n"
                                 + "Cantidad de boletos: " + cantidadBoletos + "\n"
-                                + "Entradas disponibles: " + asientosDisponibles);
+                                + "Entradas disponibles: " + asientosDisponibles + "\n"
+                                + "Total: " + total);
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "La cantidad de boletos debe ser mayor a 0.");

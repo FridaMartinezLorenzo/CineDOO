@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import ProyectoCinePersistencia.db.mappers.BoletoMapper;
 import ProyectoCinePersistencia.entities.Boleto;
 
 public class BoletoDAOImpl implements BoletoDAO {
@@ -16,39 +17,44 @@ public class BoletoDAOImpl implements BoletoDAO {
     }
 
     @Override
-    public List<Boleto> listarTodos() {
+    public List<Boleto> Listar() {
         try (SqlSession session = sqlSessionFactory.openSession()) {
-            return session.selectList("BoletoMapper.listarTodos");
+            BoletoMapper mapper = session.getMapper(BoletoMapper.class);
+            return mapper.listarTodos();
         }
     }
 
     @Override
-    public Boleto obtenerPorId(int id) {
+    public Boleto Buscar(int id) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
-            return session.selectOne("BoletoMapper.obtenerPorId", id);
+            BoletoMapper mapper = session.getMapper(BoletoMapper.class);
+            return mapper.obtenerPorId(id);
         }
     }
 
     @Override
-    public void insertar(Boleto boleto) {
+    public void Crear(Boleto boleto) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
-            session.insert("BoletoMapper.insertar", boleto);
+            BoletoMapper mapper = session.getMapper(BoletoMapper.class);
+            mapper.insertar(boleto);
             session.commit();
         }
     }
 
     @Override
-    public void actualizar(Boleto boleto) {
+    public void Actualizar(Boleto boleto) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
-            session.update("BoletoMapper.actualizar", boleto);
+            BoletoMapper mapper = session.getMapper(BoletoMapper.class);
+            mapper.actualizar(boleto);
             session.commit();
         }
     }
 
     @Override
-    public void eliminar(int id) {
+    public void Eliminar(int id) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
-            session.delete("BoletoMapper.eliminar", id);
+            BoletoMapper mapper = session.getMapper(BoletoMapper.class);
+            mapper.eliminar(id);
             session.commit();
         }
     }

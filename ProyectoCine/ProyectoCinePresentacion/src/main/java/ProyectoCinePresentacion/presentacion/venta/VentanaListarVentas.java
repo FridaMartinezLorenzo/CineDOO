@@ -12,8 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import ProyectoCinePresentacion.controllers.VentaController;
-
 public class VentanaListarVentas extends JFrame {
 
     private JTable ventasTable;
@@ -71,11 +69,4 @@ public class VentanaListarVentas extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        VentaController ventaController = new VentaController();
-        List<Object[]> ventas = ventaController.listarVentas();
-
-        VentanaListarVentas ventanaListarVentas = new VentanaListarVentas(ventas);
-        ventanaListarVentas.mostrar();
-    }
 }

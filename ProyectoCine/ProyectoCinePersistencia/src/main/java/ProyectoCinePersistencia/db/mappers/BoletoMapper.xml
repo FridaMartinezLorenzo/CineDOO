@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoletoMapper">
+    <resultMap id="BoletoResultMap" type="ProyectoCinePersistencia.entities.Boleto">
+        <id property="IdTipoBoleto" column="IdTipoBoleto"/>
+        <result property="Nombre" column="Nombre"/>
+        <result property="Precio" column="Precio"/>
+    </resultMap>
+
+    <select id="listarTodos" resultMap="BoletoResultMap">
+        SELECT * FROM Boleto
+    </select>
+
+    <select id="obtenerPorId" parameterType="int" resultMap="BoletoResultMap">
+        SELECT * FROM Boleto WHERE IdTipoBoleto = #{id}
+    </select>
+
+    <insert id="insertar" parameterType="ProyectoCinePersistencia.entities.Boleto">
+        INSERT INTO Boleto (Nombre, Precio)
+        VALUES (#{Nombre}, #{Precio})
+    </insert>
+
+    <update id="actualizar" parameterType="ProyectoCinePersistencia.entities.Boleto">
+        UPDATE Boleto
+        SET Nombre = #{Nombre}, Precio = #{Precio}
+        WHERE IdTipoBoleto = #{IdTipoBoleto}
+    </update>
+
+    <delete id="eliminar" parameterType="int">
+        DELETE FROM Boleto WHERE IdTipoBoleto = #{id}
+    </delete>
+</mapper>

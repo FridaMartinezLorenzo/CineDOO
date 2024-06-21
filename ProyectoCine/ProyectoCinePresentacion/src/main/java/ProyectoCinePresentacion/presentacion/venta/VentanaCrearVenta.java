@@ -1,34 +1,43 @@
 package ProyectoCinePresentacion.presentacion.venta;
 
-import ProyectoCinePersistencia.dao.funcion.FuncionDAO;
-import ProyectoCinePersistencia.dao.funcion.FuncionDAOImpl;
-import ProyectoCinePersistencia.dao.pelicula.PeliculaDAOImpl;
-import ProyectoCinePersistencia.entities.Funcion;
-import ProyectoCinePersistencia.entities.Pelicula;
-import ProyectoCinePersistencia.utils.MyBatisUtil;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import ProyectoCinePersistencia.entities.Funcion;
+import ProyectoCinePersistencia.entities.Pelicula;
+import ProyectoCinePresentacion.controllers.FuncionController;
+import ProyectoCinePresentacion.controllers.PeliculaController;
 
 public class VentanaCrearVenta extends JFrame {
 
     private JComboBox<String> peliculasComboBox;
     private JComboBox<String> horariosComboBox;
     private JTextField cantidadBoletosField;
+    private JLabel boletosDisponiblesLabel;
     private List<Pelicula> peliculas;
     private List<Funcion> funciones;
-    private FuncionDAO funcionDAO;
+    private PeliculaController peliculaController;
+    private FuncionController funcionController;
 
     public VentanaCrearVenta() {
-        PeliculaDAOImpl peliculaDAO = new PeliculaDAOImpl(MyBatisUtil.getSqlSessionFactory());
-        this.peliculas = peliculaDAO.Listar();
-        this.funcionDAO = new FuncionDAOImpl(MyBatisUtil.getSqlSessionFactory());
+        this.peliculaController = new PeliculaController();
+        this.funcionController = new FuncionController();
+        this.peliculas = peliculaController.listarPeliculas();
         initComponents();
     }
 
@@ -80,6 +89,16 @@ public class VentanaCrearVenta extends JFrame {
         cantidadBoletosField = new JTextField(5);
         panel.add(cantidadBoletosField, gbc);
 
+        // Boletos Disponibles
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        panel.add(new JLabel("Boletos Disponibles:"), gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        boletosDisponiblesLabel = new JLabel();
+        panel.add(boletosDisponiblesLabel, gbc);
+
         // Botón Aceptar
         JButton aceptarButton = new JButton("Aceptar");
         aceptarButton.addActionListener(new ActionListener() {
@@ -90,7 +109,7 @@ public class VentanaCrearVenta extends JFrame {
         });
 
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         panel.add(aceptarButton, gbc);
@@ -106,6 +125,14 @@ public class VentanaCrearVenta extends JFrame {
             }
         });
 
+        // Agregar listener al comboBox de horarios
+        horariosComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarBoletosDisponibles();
+            }
+        });
+
         // Actualizar horarios al inicializar
         actualizarHorarios();
     }
@@ -114,11 +141,23 @@ public class VentanaCrearVenta extends JFrame {
         int selectedIndex = peliculasComboBox.getSelectedIndex();
         if (selectedIndex >= 0 && selectedIndex < peliculas.size()) {
             Pelicula peliculaSeleccionada = peliculas.get(selectedIndex);
-            this.funciones = funcionDAO.ListarPorPelicula(peliculaSeleccionada.getIdPelicula());
+            this.funciones = funcionController.listarFuncionesPorPelicula(peliculaSeleccionada.getIdPelicula());
             String[] horarios = funciones.stream()
                     .map(funcion -> funcion.getHorario().getHoraInicio()) // Asumiendo que Horario tiene un método getDescripcion
                     .toArray(String[]::new);
             horariosComboBox.setModel(new DefaultComboBoxModel<>(horarios));
+            actualizarBoletosDisponibles(); // Actualizar boletos disponibles al cambiar de película
+        }
+    }
+
+    private void actualizarBoletosDisponibles() {
+        int selectedIndexHorario = horariosComboBox.getSelectedIndex();
+        if (selectedIndexHorario >= 0 && selectedIndexHorario < funciones.size()) {
+            Funcion funcionSeleccionada = funciones.get(selectedIndexHorario);
+            int boletosDisponibles = funcionController.boletosDisponibles(funcionSeleccionada.getIdFuncion());
+            boletosDisponiblesLabel.setText(String.valueOf(boletosDisponibles));
+        } else {
+            boletosDisponiblesLabel.setText("");
         }
     }
 
@@ -138,7 +177,7 @@ public class VentanaCrearVenta extends JFrame {
                     Funcion funcionSeleccionada = funciones.get(selectedIndexHorario);
 
                     // Verificación de disponibilidad de boletos
-                    int asientosDisponibles = funcionDAO.BoletosDisponibles(funcionSeleccionada.getIdFuncion());
+                    int asientosDisponibles = funcionController.boletosDisponibles(funcionSeleccionada.getIdFuncion());
                     if (cantidadBoletos > asientosDisponibles) {
                         JOptionPane.showMessageDialog(this, "No hay suficientes asientos disponibles.\n"
                                 + "Entradas disponibles: " + asientosDisponibles + "\n"

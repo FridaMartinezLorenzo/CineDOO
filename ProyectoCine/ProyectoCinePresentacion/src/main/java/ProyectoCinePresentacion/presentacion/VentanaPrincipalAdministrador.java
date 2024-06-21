@@ -17,6 +17,12 @@ import ProyectoCinePersistencia.utils.MyBatisUtil;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaCrearPelicula;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaListarPeliculas;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaSeleccionarPelicula;
+import ProyectoCinePresentacion.presentacion.ganancia.VentanaObtenerGanancia;
+import ProyectoCinePresentacion.presentacion.horario.VentanaListarHorario;
+import ProyectoCinePresentacion.presentacion.horario.VentanaCrearHorario;
+import ProyectoCinePresentacion.presentacion.horario.VentanaEliminarHorario;
+import ProyectoCinePresentacion.presentacion.horario.VentanaBuscarHorario;
+import ProyectoCinePresentacion.presentacion.horario.VentanaActualizarHorario;
 
 public class VentanaPrincipalAdministrador extends JFrame {
 
@@ -48,6 +54,7 @@ public class VentanaPrincipalAdministrador extends JFrame {
         menuHorario.add(createMenuItem("Listar Horarios"));
         menuHorario.add(createMenuItem("Actualizar Horario"));
         menuHorario.add(createMenuItem("Eliminar Horario"));
+        menuHorario.add(createMenuItem("Buscar Horario"));
 
         // Menú de Promoción
         JMenu menuPromocion = new JMenu("Promoción");
@@ -124,18 +131,32 @@ public class VentanaPrincipalAdministrador extends JFrame {
                         // Eliminar Película
                         break;
                     case "Ver Ganancias":
+                        VentanaObtenerGanancia ventanaObtenerGanancia = new VentanaObtenerGanancia();
+                        ventanaObtenerGanancia.mostrar();
                         // Ver Ganancias
                         break;
                     case "Crear Horario":
+                        VentanaCrearHorario ventanaCrearHorario = new VentanaCrearHorario();
+                        ventanaCrearHorario.mostrar();
                         // Crear Horario
                         break;
                     case "Listar Horarios":
+                        VentanaListarHorario ventanaListarHorario = new VentanaListarHorario();
+                        ventanaListarHorario.mostrar();
                         // Listar Horarios
                         break;
                     case "Actualizar Horario":
+                        VentanaActualizarHorario ventanaActualizarHorario = new VentanaActualizarHorario();
+                        ventanaActualizarHorario.mostrar();
                         // Actualizar Horario
                         break;
+                    case "Buscar Horario":
+                        VentanaBuscarHorario ventanaBuscarHorario = new VentanaBuscarHorario();
+                        ventanaBuscarHorario.mostrar();
+                    break;
                     case "Eliminar Horario":
+                        VentanaEliminarHorario ventanaEliminarHorario = new VentanaEliminarHorario();
+                        ventanaEliminarHorario.mostrar();
                         // Eliminar Horario
                         break;
                     case "Crear Promoción":

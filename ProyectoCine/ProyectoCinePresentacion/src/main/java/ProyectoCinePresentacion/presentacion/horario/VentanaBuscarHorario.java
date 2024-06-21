@@ -20,7 +20,7 @@ public class VentanaBuscarHorario extends JFrame {
 
     private void initializeUI() {
         setTitle("Buscar Horario");
-        setSize(400, 200);
+        setSize(500, 200);
         // Cambiar de JFrame.EXIT_ON_CLOSE a JFrame.DISPOSE_ON_CLOSE
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -64,7 +64,7 @@ public class VentanaBuscarHorario extends JFrame {
             if (horario != null) {
                 resultadoLabel.setText("Id: " + horario.getIdHorario() + " Horario: " + horario.getHoraInicio());
             } else {
-                resultadoLabel.setText("Resultado: No se encontró el horario con el ID proporcionado");
+                resultadoLabel.setText("Resultado: No se encontró el horario.");
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El ID debe ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);

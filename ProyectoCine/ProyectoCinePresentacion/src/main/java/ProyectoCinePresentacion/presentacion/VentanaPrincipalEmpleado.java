@@ -1,9 +1,21 @@
 package ProyectoCinePresentacion.presentacion;
 
 import javax.swing.*;
+
+import ProyectoCinePersistencia.dao.categoria.CategoriaDAOImpl;
+import ProyectoCinePersistencia.entities.Categoria;
+import ProyectoCinePersistencia.utils.MyBatisUtil;
+import ProyectoCinePresentacion.presentacion.pelicula.VentanaCrearPelicula;
+import ProyectoCinePresentacion.presentacion.pelicula.VentanaListarPeliculas;
+import ProyectoCinePresentacion.presentacion.pelicula.VentanaSeleccionarPelicula;
+import ProyectoCinePresentacion.presentacion.horario.VentanaListarHorario;
+import ProyectoCinePresentacion.presentacion.horario.VentanaBuscarHorario;
+
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class VentanaPrincipalEmpleado extends JFrame {
 
@@ -24,8 +36,8 @@ public class VentanaPrincipalEmpleado extends JFrame {
 
         // Menú de Horario
         JMenu menuHorario = new JMenu("Horario");
-        menuHorario.add(createMenuItem("Buscar"));
-        menuHorario.add(createMenuItem("Listar"));
+        menuHorario.add(createMenuItem("Buscar Horario"));
+        menuHorario.add(createMenuItem("Listar  Horarios"));
 
         // Menú de Promoción
         JMenu menuPromocion = new JMenu("Promoción");
@@ -58,7 +70,23 @@ public class VentanaPrincipalEmpleado extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Acción a realizar cuando se selecciona el ítem del menú
-                JOptionPane.showMessageDialog(VentanaPrincipalEmpleado.this, "Seleccionaste: " + name);
+                 // Hacemos el precargado de los datos que podrían ser necesarios
+                CategoriaDAOImpl categoriaDAO = new CategoriaDAOImpl(MyBatisUtil.getSqlSessionFactory());
+                List<Categoria> categorias = categoriaDAO.Listar();
+                List<String> nombresCategorias = categorias.stream()
+                        .map(Categoria::getNombre)
+                        .collect(Collectors.toList());
+
+                switch (name) {
+                    case "Buscar Horario":
+                        VentanaBuscarHorario ventanaBuscarHorario = new VentanaBuscarHorario();
+                        ventanaBuscarHorario.mostrar();
+                        break;
+                    case "Listar  Horarios":
+                        VentanaListarHorario ventanaListarHorario = new VentanaListarHorario();
+                        ventanaListarHorario.mostrar();
+                        break;
+                }
             }
         });
         return menuItem;

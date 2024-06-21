@@ -9,15 +9,16 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 
 import ProyectoCinePersistencia.dao.categoria.CategoriaDAOImpl;
 import ProyectoCinePersistencia.entities.Categoria;
 import ProyectoCinePersistencia.utils.MyBatisUtil;
+import ProyectoCinePresentacion.controllers.VentaController;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaCrearPelicula;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaListarPeliculas;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaSeleccionarPelicula;
-import ProyectoCinePresentacion.presentacion.venta.VentanaCrearVenta; // Importa VentanaCrearVenta
+import ProyectoCinePresentacion.presentacion.venta.VentanaCrearVenta;
+import ProyectoCinePresentacion.presentacion.venta.VentanaListarVentas;
 
 public class VentanaPrincipalAdministrador extends JFrame {
 
@@ -74,7 +75,7 @@ public class VentanaPrincipalAdministrador extends JFrame {
         // Menú de Venta
         JMenu menuVenta = new JMenu("Venta");
         menuVenta.add(createMenuItem("Crear Venta"));
-        menuVenta.add(createMenuItem("Eliminar Venta"));
+        menuVenta.add(createMenuItem("Listar Ventas"));
 
         // Agregar los menús a la barra de menú
         menuBar.add(menuPelicula);
@@ -179,8 +180,11 @@ public class VentanaPrincipalAdministrador extends JFrame {
                         VentanaCrearVenta ventanaCrearVenta = new VentanaCrearVenta();
                         ventanaCrearVenta.mostrar();
                         break;
-                    case "Eliminar Venta":
-                        // Eliminar Venta
+                    case "Listar Ventas":
+                        VentaController ventaController = new VentaController();
+                        List<Object[]> ventas = ventaController.listarVentas();
+                        VentanaListarVentas ventanaListarVenta = new VentanaListarVentas(ventas);
+                        ventanaListarVenta.mostrar();
                         break;
                     default:
                         break;

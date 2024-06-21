@@ -2,23 +2,28 @@ package ProyectoCinePersistencia.dao.venta;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
 import ProyectoCinePersistencia.entities.Venta;
+import ProyectoCinePersistencia.utils.MyBatisUtil;
 
 public class VentaTest {
 
     private VentaDAOImpl ventaDAO;
     private Venta venta;
+    private SqlSessionFactory sqlSessionFactory;
 
     @Before
     public void setUp() {
-        ventaDAO = new VentaDAOImpl();
+        sqlSessionFactory = MyBatisUtil.getSqlSessionFactory();
+        ventaDAO = new VentaDAOImpl(sqlSessionFactory);
         venta = new Venta();
         venta.setIdUsuario(1);
         venta.setIdFuncion(1);
@@ -30,12 +35,13 @@ public class VentaTest {
     public void tearDown() {
         ventaDAO = null;
         venta = null;
+        sqlSessionFactory = null;
     }
 
     @Test
     public void testCrearVenta() {
         ventaDAO.Crear(venta);
-        assertNotNull("La venta creada no debe ser nula", venta.getIdVenta());
+        assertTrue("La venta creada debe tener un ID positivo", venta.getIdVenta() > 0);
     }
 
     @Test

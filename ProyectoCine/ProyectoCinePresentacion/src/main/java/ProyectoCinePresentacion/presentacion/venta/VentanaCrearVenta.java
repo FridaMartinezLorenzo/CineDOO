@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,6 +37,13 @@ public class VentanaCrearVenta extends JFrame {
         setSize(400, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Aquí puedes agregar cualquier acción adicional que quieras al cerrar la ventana
+            }
+        });
 
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -105,7 +114,6 @@ public class VentanaCrearVenta extends JFrame {
         int selectedIndex = peliculasComboBox.getSelectedIndex();
         if (selectedIndex >= 0 && selectedIndex < peliculas.size()) {
             Pelicula peliculaSeleccionada = peliculas.get(selectedIndex);
-            FuncionDAOImpl funcionDAO = new FuncionDAOImpl(MyBatisUtil.getSqlSessionFactory());
             this.funciones = funcionDAO.ListarPorPelicula(peliculaSeleccionada.getIdPelicula());
             String[] horarios = funciones.stream()
                     .map(funcion -> funcion.getHorario().getHoraInicio()) // Asumiendo que Horario tiene un método getDescripcion

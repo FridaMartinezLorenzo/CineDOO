@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProyectoCinePersistencia.db.mappers.SalaMapper">
+
+    <resultMap id="salaResultMap" type="ProyectoCinePersistencia.entities.Sala">
+        <id property="IdSala" column="IdSala"/>
+        <result property="NumAsiento" column="NumAsiento"/>
+    </resultMap>
+
+    <insert id="insertarSala" parameterType="ProyectoCinePersistencia.entities.Sala" useGeneratedKeys="true" keyProperty="IdSala">
+        INSERT INTO salas (NumAsiento)
+        VALUES (#{NumAsiento})
+    </insert>
+
+    <select id="buscarSala" parameterType="int" resultMap="salaResultMap">
+        SELECT * FROM salas WHERE IdSala = #{id}
+    </select>
+
+    <update id="actualizarSala" parameterType="ProyectoCinePersistencia.entities.Sala">
+        UPDATE salas SET NumAsiento = #{NumAsiento}
+        WHERE IdSala = #{IdSala}
+    </update>
+
+    <delete id="eliminarSala" parameterType="int">
+        DELETE FROM salas WHERE IdSala = #{id}
+    </delete>
+
+    <select id="listarSalas" resultMap="salaResultMap">
+        SELECT * FROM salas
+    </select>
+
+</mapper>

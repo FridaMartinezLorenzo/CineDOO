@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import ProyectoCinePersistencia.entities.Boleto;
 import ProyectoCinePersistencia.entities.Funcion;
@@ -162,6 +164,32 @@ public class VentanaCrearVenta extends JFrame {
             }
         });
 
+        // Agregar listener al comboBox de tipo de boleto
+        tipoBoletoComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarTotal();
+            }
+        });
+
+        // Agregar listener al campo de cantidad de boletos
+        cantidadBoletosField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                actualizarTotal();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                actualizarTotal();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                actualizarTotal();
+            }
+        });
+
         // Actualizar horarios al inicializar
         actualizarHorarios();
     }
@@ -187,6 +215,28 @@ public class VentanaCrearVenta extends JFrame {
             boletosDisponiblesLabel.setText(String.valueOf(boletosDisponibles));
         } else {
             boletosDisponiblesLabel.setText("");
+        }
+    }
+
+    private void actualizarTotal() {
+        int selectedIndexTipoBoleto = tipoBoletoComboBox.getSelectedIndex();
+        String cantidadBoletosText = cantidadBoletosField.getText();
+
+        if (selectedIndexTipoBoleto >= 0 && selectedIndexTipoBoleto < boletos.size() && !cantidadBoletosText.isEmpty()) {
+            try {
+                int cantidadBoletos = Integer.parseInt(cantidadBoletosText);
+                if (cantidadBoletos > 0) {
+                    Boleto boletoSeleccionado = boletos.get(selectedIndexTipoBoleto);
+                    double total = boletoController.calcularTotal(boletoSeleccionado.getIdTipoBoleto(), cantidadBoletos);
+                    totalLabel.setText(String.format("%.2f", total));
+                } else {
+                    totalLabel.setText("0.00");
+                }
+            } catch (NumberFormatException e) {
+                totalLabel.setText("0.00");
+            }
+        } else {
+            totalLabel.setText("0.00");
         }
     }
 

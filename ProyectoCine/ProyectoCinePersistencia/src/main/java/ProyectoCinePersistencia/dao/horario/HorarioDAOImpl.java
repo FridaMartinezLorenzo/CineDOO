@@ -36,20 +36,22 @@ public class HorarioDAOImpl implements HorarioDAO {
     }
 
     @Override
-    public void Actualizar(Horario horario) {
+    public boolean Actualizar(Horario horario) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             HorarioMapper mapper = session.getMapper(HorarioMapper.class);
             mapper.actualizarHorario(horario);
             session.commit();
+            return true;
         }
     }
 
     @Override
-    public void Eliminar(int id) {
+    public boolean Eliminar(int id) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             HorarioMapper mapper = session.getMapper(HorarioMapper.class);
             mapper.eliminarHorario(id);
             session.commit();
+            return true;
         }
     }
 

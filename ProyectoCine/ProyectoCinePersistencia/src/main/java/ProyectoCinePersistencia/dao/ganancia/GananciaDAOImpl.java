@@ -5,7 +5,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import ProyectoCinePersistencia.db.mappers.GananciaMapper;
 
-public class GananciaDAOImpl {
+public class GananciaDAOImpl implements GananciaDAO {
 
     private SqlSessionFactory sqlSessionFactory;
 

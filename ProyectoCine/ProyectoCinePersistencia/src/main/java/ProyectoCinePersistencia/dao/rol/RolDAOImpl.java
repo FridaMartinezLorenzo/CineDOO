@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import ProyectoCinePersistencia.db.mappers.RolMapper;
 import ProyectoCinePersistencia.entities.Rol;
 
-public class RolDAOImpl {
+public class RolDAOImpl implements RolDAO {
 
     private SqlSessionFactory sqlSessionFactory;
 
@@ -16,6 +16,7 @@ public class RolDAOImpl {
         this.sqlSessionFactory = sqlSessionFactory;
     }
 
+    @Override
     public List<Rol> Listar() {
         List<Rol> roles = null;
         SqlSession session = sqlSessionFactory.openSession();
@@ -28,6 +29,7 @@ public class RolDAOImpl {
         return roles;
     }
 
+    @Override
     public boolean Crear(Rol rol) {
         boolean result = false;
         SqlSession session = sqlSessionFactory.openSession();
@@ -41,6 +43,7 @@ public class RolDAOImpl {
         return result;
     }
 
+    @Override
     public boolean Eliminar(int id) {
         boolean result = false;
         SqlSession session = sqlSessionFactory.openSession();
@@ -54,6 +57,7 @@ public class RolDAOImpl {
         return result;
     }
 
+    @Override
     public boolean Actualizar(Rol rol) {
         boolean result = false;
         SqlSession session = sqlSessionFactory.openSession();
@@ -67,6 +71,7 @@ public class RolDAOImpl {
         return result;
     }
 
+    @Override
     public Rol BuscaRol(int id) {
         Rol rol = null;
         SqlSession session = sqlSessionFactory.openSession();

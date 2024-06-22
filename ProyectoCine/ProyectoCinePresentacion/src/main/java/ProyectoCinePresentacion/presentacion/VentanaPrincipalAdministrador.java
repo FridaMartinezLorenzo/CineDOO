@@ -11,7 +11,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import ProyectoCinePersistencia.dao.categoria.CategoriaDAOImpl;
+import ProyectoCinePersistencia.dao.rol.RolDAOImpl;
 import ProyectoCinePersistencia.entities.Categoria;
+import ProyectoCinePersistencia.entities.Rol;
 import ProyectoCinePersistencia.utils.MyBatisUtil;
 import ProyectoCinePresentacion.controllers.VentaController;
 import ProyectoCinePresentacion.presentacion.ganancias.VentanaObtenerGanancia;
@@ -24,6 +26,14 @@ import ProyectoCinePresentacion.presentacion.pelicula.VentanaCrearPelicula;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaEliminarPelicula;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaListarPeliculas;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaSeleccionarPelicula;
+import ProyectoCinePresentacion.presentacion.sala.VentanaCrearSala;
+import ProyectoCinePresentacion.presentacion.sala.VentanaEliminarSala;
+import ProyectoCinePresentacion.presentacion.sala.VentanaListarSalas;
+import ProyectoCinePresentacion.presentacion.sala.VentanaSeleccionarSala;
+import ProyectoCinePresentacion.presentacion.usuario.VentanaCrearUsuario;
+import ProyectoCinePresentacion.presentacion.usuario.VentanaEliminarUsuario;
+import ProyectoCinePresentacion.presentacion.usuario.VentanaListarUsuario;
+import ProyectoCinePresentacion.presentacion.usuario.VentanaSeleccionarUsuario;
 import ProyectoCinePresentacion.presentacion.venta.VentanaCrearVenta;
 import ProyectoCinePresentacion.presentacion.venta.VentanaListarVentas;
 
@@ -57,13 +67,6 @@ public class VentanaPrincipalAdministrador extends JFrame {
         menuHorario.add(createMenuItem("Listar Horarios"));
         menuHorario.add(createMenuItem("Actualizar Horario"));
         menuHorario.add(createMenuItem("Eliminar Horario"));
-
-        // Menú de Promoción
-        JMenu menuPromocion = new JMenu("Promoción");
-        menuPromocion.add(createMenuItem("Crear Promoción"));
-        menuPromocion.add(createMenuItem("Listar Promociones"));
-        menuPromocion.add(createMenuItem("Actualizar Promoción"));
-        menuPromocion.add(createMenuItem("Eliminar Promoción"));
 
         // Menú de Sala
         JMenu menuSala = new JMenu("Sala");
@@ -112,6 +115,11 @@ public class VentanaPrincipalAdministrador extends JFrame {
                         .map(Categoria::getNombre)
                         .collect(Collectors.toList());
 
+                RolDAOImpl rolDAO = new RolDAOImpl(MyBatisUtil.getSqlSessionFactory());
+                List<Rol> roles = rolDAO.Listar();
+                List<String> nombresRoles = roles.stream()
+                        .map(Rol::getNombre)
+                        .collect(Collectors.toList());
                 switch (name) {
                     case "Crear Película":
                         VentanaCrearPelicula ventanaCrearPelicula = new VentanaCrearPelicula(nombresCategorias);
@@ -162,40 +170,45 @@ public class VentanaPrincipalAdministrador extends JFrame {
                         ventanaEliminarHorario.mostrar();
                         // Eliminar Horario
                         break;
-                    case "Crear Promoción":
-                        // Crear Promoción
-                        break;
-                    case "Listar Promociones":
-                        // Listar Promociones
-                        break;
-                    case "Actualizar Promoción":
-                        // Actualizar Promoción
-                        break;
-                    case "Eliminar Promoción":
-                        // Eliminar Promoción
-                        break;
                     case "Crear Sala":
+                        VentanaCrearSala ventanaCrearSala = new VentanaCrearSala();
+                        ventanaCrearSala.mostrar();
                         // Crear Sala
                         break;
                     case "Listar Salas":
+                        VentanaListarSalas ventanaListarSalas = new VentanaListarSalas();
+                        ventanaListarSalas.mostrar();
                         // Listar Salas
                         break;
                     case "Actualizar Sala":
+                        VentanaSeleccionarSala ventanaSeleccionarSalaActualizar = new VentanaSeleccionarSala("editar");
+                        ventanaSeleccionarSalaActualizar.mostrar();
                         // Actualizar Sala
                         break;
                     case "Eliminar Sala":
+                        VentanaEliminarSala ventanaEliminarSala = new VentanaEliminarSala();
+                        ventanaEliminarSala.mostrar();
                         // Eliminar Sala
                         break;
                     case "Crear Usuario":
+                        VentanaCrearUsuario ventanaCrearUsuario = new VentanaCrearUsuario(nombresRoles);
+                        ventanaCrearUsuario.mostrar();
                         // Crear Usuario
                         break;
                     case "Listar Usuarios":
+                        VentanaListarUsuario ventanaListarUsuario = new VentanaListarUsuario();
+                        ventanaListarUsuario.mostrar();
                         // Listar Usuarios
                         break;
                     case "Actualizar Usuario":
+                        VentanaSeleccionarUsuario ventanaSeleccionarUsuarioActualizar = new VentanaSeleccionarUsuario(
+                                "editar");
+                        ventanaSeleccionarUsuarioActualizar.mostrar();
                         // Actualizar Usuario
                         break;
                     case "Eliminar Usuario":
+                        VentanaEliminarUsuario ventanaEliminarUsuario = new VentanaEliminarUsuario();
+                        ventanaEliminarUsuario.mostrar();
                         // Eliminar Usuario
                         break;
                     case "Crear Venta":

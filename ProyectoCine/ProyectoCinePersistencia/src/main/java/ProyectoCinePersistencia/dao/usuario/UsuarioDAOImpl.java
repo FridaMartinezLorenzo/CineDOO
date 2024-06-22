@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import ProyectoCinePersistencia.db.mappers.UsuarioMapper;
 import ProyectoCinePersistencia.entities.Usuario;
 
-public class UsuarioDAOImpl {
+public class UsuarioDAOImpl implements UsuarioDAO {
 
     private final SqlSessionFactory sqlSessionFactory;
 
@@ -16,6 +16,7 @@ public class UsuarioDAOImpl {
         this.sqlSessionFactory = sqlSessionFactory;
     }
 
+    @Override
     public boolean Crear(Usuario usuario) {
         SqlSession session = null;
         try {
@@ -32,6 +33,7 @@ public class UsuarioDAOImpl {
         }
     }
 
+    @Override
     public boolean Actualizar(Usuario usuario) {
         SqlSession session = null;
         try {
@@ -48,6 +50,7 @@ public class UsuarioDAOImpl {
         }
     }
 
+    @Override
     public boolean Eliminar(int id) {
         SqlSession session = null;
         try {
@@ -64,6 +67,7 @@ public class UsuarioDAOImpl {
         }
     }
 
+    @Override
     public Usuario Buscar(int id) {
         SqlSession session = null;
         try {
@@ -78,6 +82,7 @@ public class UsuarioDAOImpl {
         }
     }
 
+    @Override
     public List<Usuario> Listar() {
         SqlSession session = null;
         try {

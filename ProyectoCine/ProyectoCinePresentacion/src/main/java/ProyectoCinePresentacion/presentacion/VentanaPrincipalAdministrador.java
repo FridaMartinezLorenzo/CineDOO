@@ -65,7 +65,7 @@ public class VentanaPrincipalAdministrador extends JFrame {
         JMenu menuFuncion = new JMenu("Función");
         menuFuncion.add(createMenuItem("Crear Función"));
         menuFuncion.add(createMenuItem("Listar Funciones"));
-        menuFuncion.add(createMenuItem("Buscar Función"));
+        //menuFuncion.add(createMenuItem("Buscar Función"));
         //menuFuncion.add(createMenuItem("Actualizar Función"));
         menuFuncion.add(createMenuItem("Eliminar Función"));
         menuFuncion.add(createMenuItem("Funciones por Película"));

@@ -16,13 +16,14 @@ public class VentanaCrearSala extends JFrame {
 
     public VentanaCrearSala() {
         this.salaController = new SalaController();
-        initComponents();// Esto es lo que se necesita para que la ventana se muestre
+        initComponents();
     }
 
     private void initComponents() {
         setTitle("Crear Sala");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Cambiar el comportamiento del cierre de la ventana
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new GridBagLayout());
@@ -56,17 +57,28 @@ public class VentanaCrearSala extends JFrame {
     }
 
     private void crearSala() {
-        int numeroAsientos = Integer.parseInt(numeroAsientosField.getText());
+        String numeroAsientosText = numeroAsientosField.getText();
 
-        Sala nuevaSala = new Sala(obtenerIdsala(), numeroAsientos);
-        Sala salaCreada = salaController.crearSala(nuevaSala);
+        // Validar campo vacío
+        if (numeroAsientosText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El campo 'Número de Asientos' no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-        if (salaCreada.getIdSala() != -1) {
-            JOptionPane.showMessageDialog(this, "Sala creada con éxito", "Sala Creada",
-                    JOptionPane.INFORMATION_MESSAGE);
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al crear la sala", "Error", JOptionPane.ERROR_MESSAGE);
+        try {
+            int numeroAsientos = Integer.parseInt(numeroAsientosText);
+
+            Sala nuevaSala = new Sala(obtenerIdsala(), numeroAsientos);
+            Sala salaCreada = salaController.crearSala(nuevaSala);
+
+            if (salaCreada.getIdSala() != -1) {
+                JOptionPane.showMessageDialog(this, "Sala creada con éxito", "Sala Creada", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al crear la sala", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese un número válido para 'Número de Asientos'", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 

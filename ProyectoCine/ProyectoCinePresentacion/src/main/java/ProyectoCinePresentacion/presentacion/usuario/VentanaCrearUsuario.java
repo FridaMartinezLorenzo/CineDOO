@@ -25,7 +25,7 @@ public class VentanaCrearUsuario extends JFrame {
     private void initComponents(List<String> roles) {
         setTitle("Crear Usuario");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new GridBagLayout());
@@ -88,6 +88,12 @@ public class VentanaCrearUsuario extends JFrame {
         String correo = correoField.getText();
         String contrasena = contrasenaField.getText();
         String rol = (String) rolesComboBox.getSelectedItem();
+
+        // Validar campos vacíos
+        if (nombre.isEmpty() || correo.isEmpty() || contrasena.isEmpty() || rol == null) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         Usuario nuevoUsuario = new Usuario(obtenerIdUsuario(), nombre, correo, contrasena, obtenerIdRol(rol));
         Usuario usuarioCreado = usuarioController.crearUsuario(nuevoUsuario);

@@ -72,6 +72,7 @@ public class VentanaPrincipalAdministrador extends JFrame {
         JMenu menuSala = new JMenu("Sala");
         menuSala.add(createMenuItem("Crear Sala"));
         menuSala.add(createMenuItem("Listar Salas"));
+        menuSala.add(createMenuItem("Buscar Sala"));
         menuSala.add(createMenuItem("Actualizar Sala"));
         menuSala.add(createMenuItem("Eliminar Sala"));
 
@@ -79,6 +80,7 @@ public class VentanaPrincipalAdministrador extends JFrame {
         JMenu menuUsuario = new JMenu("Usuario");
         menuUsuario.add(createMenuItem("Crear Usuario"));
         menuUsuario.add(createMenuItem("Listar Usuarios"));
+        menuUsuario.add(createMenuItem("Buscar Usuario"));
         menuUsuario.add(createMenuItem("Actualizar Usuario"));
         menuUsuario.add(createMenuItem("Eliminar Usuario"));
 
@@ -179,6 +181,11 @@ public class VentanaPrincipalAdministrador extends JFrame {
                         ventanaListarSalas.mostrar();
                         // Listar Salas
                         break;
+                    case "Buscar Sala":
+                        VentanaSeleccionarSala ventanaSeleccionarSalaBuscar = new VentanaSeleccionarSala("buscar");
+                        ventanaSeleccionarSalaBuscar.mostrar();
+                        // Buscar Sala
+                        break;
                     case "Actualizar Sala":
                         VentanaSeleccionarSala ventanaSeleccionarSalaActualizar = new VentanaSeleccionarSala("editar");
                         ventanaSeleccionarSalaActualizar.mostrar();
@@ -198,6 +205,11 @@ public class VentanaPrincipalAdministrador extends JFrame {
                         VentanaListarUsuario ventanaListarUsuario = new VentanaListarUsuario();
                         ventanaListarUsuario.mostrar();
                         // Listar Usuarios
+                        break;
+                    case "Buscar Usuario":
+                        VentanaSeleccionarUsuario ventanaSeleccionarUsuarioBuscar = new VentanaSeleccionarUsuario("buscar");
+                        ventanaSeleccionarUsuarioBuscar.mostrar();
+                        // Buscar Usuario
                         break;
                     case "Actualizar Usuario":
                         VentanaSeleccionarUsuario ventanaSeleccionarUsuarioActualizar = new VentanaSeleccionarUsuario(

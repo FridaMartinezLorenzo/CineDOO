@@ -4,6 +4,7 @@ import ProyectoCinePresentacion.controllers.HorariosController;
 import ProyectoCinePersistencia.entities.Horario;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,21 +24,51 @@ public class VentanaCrearHorario extends JFrame {
     private void initializeUI() {
         setTitle("Crear Nuevo Horario");
         setSize(400, 200);
-        // Cambiar de JFrame.EXIT_ON_CLOSE a JFrame.DISPOSE_ON_CLOSE
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Panel de entrada
-        JPanel panel = new JPanel(new GridLayout(4, 2));
+        // Panel de entrada con borde
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBorder(new EmptyBorder(10, 10, 10, 10)); // Añadir borde vacío
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
 
         JLabel horaLabel = new JLabel("Hora:");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(horaLabel, gbc);
+
         horaComboBox = new JComboBox<>(generateHourOptions());
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        panel.add(horaComboBox, gbc);
 
         JLabel minutoLabel = new JLabel("Minuto:");
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel.add(minutoLabel, gbc);
+
         minutoComboBox = new JComboBox<>(generateMinuteOptions());
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        panel.add(minutoComboBox, gbc);
 
         JLabel amPmLabel = new JLabel("AM/PM:");
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        panel.add(amPmLabel, gbc);
+
         amPmComboBox = new JComboBox<>(new String[]{"AM", "PM"});
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        panel.add(amPmComboBox, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        gbc.weighty = 1.0; // Add vertical space
+        panel.add(Box.createVerticalStrut(10), gbc); // Add empty space
 
         JButton saveButton = new JButton("Guardar");
         saveButton.addActionListener(new ActionListener() {
@@ -47,14 +78,11 @@ public class VentanaCrearHorario extends JFrame {
             }
         });
 
-        panel.add(horaLabel);
-        panel.add(horaComboBox);
-        panel.add(minutoLabel);
-        panel.add(minutoComboBox);
-        panel.add(amPmLabel);
-        panel.add(amPmComboBox);
-        panel.add(new JLabel()); // Empty cell
-        panel.add(saveButton);
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(saveButton, gbc);
 
         add(panel);
     }
@@ -100,5 +128,4 @@ public class VentanaCrearHorario extends JFrame {
     public void mostrar() {
         setVisible(true);
     }
-
 }

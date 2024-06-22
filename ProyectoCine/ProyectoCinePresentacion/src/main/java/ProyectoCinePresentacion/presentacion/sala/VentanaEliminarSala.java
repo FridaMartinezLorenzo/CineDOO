@@ -1,15 +1,17 @@
 package ProyectoCinePresentacion.presentacion.sala;
 
 import ProyectoCinePresentacion.controllers.SalaController;
+import ProyectoCinePersistencia.entities.Sala;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class VentanaEliminarSala extends JFrame {
 
-    private JTextField idSalaField;
+    private JComboBox<Integer> idSalaComboBox;
     private SalaController salaController;
 
     public VentanaEliminarSala() {
@@ -20,7 +22,7 @@ public class VentanaEliminarSala extends JFrame {
     private void initComponents() {
         setTitle("Eliminar Sala");
         setSize(300, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new GridBagLayout());
@@ -29,12 +31,15 @@ public class VentanaEliminarSala extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        panel.add(new JLabel("ID de la Sala:"), gbc);
+        panel.add(new JLabel("Seleccione ID de la Sala:"), gbc);
+
+        List<Sala> salas = salaController.listarSalas();
+        Integer[] idSalaArray = salas.stream().map(Sala::getIdSala).toArray(Integer[]::new);
+        idSalaComboBox = new JComboBox<>(idSalaArray);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        idSalaField = new JTextField(10);
-        panel.add(idSalaField, gbc);
+        panel.add(idSalaComboBox, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -54,12 +59,12 @@ public class VentanaEliminarSala extends JFrame {
     }
 
     private void eliminarSala() {
-        int idSala = Integer.parseInt(idSalaField.getText());
+        int idSala = (int) idSalaComboBox.getSelectedItem();
         boolean exito = salaController.eliminarSala(idSala);
 
         if (exito) {
             JOptionPane.showMessageDialog(this, "Sala eliminada correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            dispose();//cierra la ventana
+            dispose();
         } else {
             JOptionPane.showMessageDialog(this, "No se pudo eliminar la sala", "Error", JOptionPane.ERROR_MESSAGE);
         }

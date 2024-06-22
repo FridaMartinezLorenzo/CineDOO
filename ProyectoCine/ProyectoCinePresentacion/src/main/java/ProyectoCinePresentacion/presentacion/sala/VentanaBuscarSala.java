@@ -23,7 +23,7 @@ public class VentanaBuscarSala extends JFrame {
 
     private void initComponents() {
         setTitle("Detalles de la Sala");
-        setSize(800, 800);
+        setSize(400, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 

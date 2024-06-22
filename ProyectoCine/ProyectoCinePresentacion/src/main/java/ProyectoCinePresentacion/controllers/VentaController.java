@@ -25,4 +25,8 @@ public class VentaController {
                 .map(venta -> new Object[]{venta.getTituloPelicula(), venta.getTotal()})
                 .collect(Collectors.toList());
     }
+
+    public void crearVenta(Venta venta) {
+        ventaDAO.Crear(venta);
+    }
 }

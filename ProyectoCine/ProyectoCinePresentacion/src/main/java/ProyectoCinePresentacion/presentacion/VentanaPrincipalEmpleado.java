@@ -1,6 +1,9 @@
 package ProyectoCinePresentacion.presentacion;
 
 import javax.swing.*;
+
+import ProyectoCinePresentacion.presentacion.sala.VentanaListarSalas;
+
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
@@ -34,7 +37,6 @@ public class VentanaPrincipalEmpleado extends JFrame {
 
         // Menú de Sala
         JMenu menuSala = new JMenu("Sala");
-        menuSala.add(createMenuItem("Buscar"));
         menuSala.add(createMenuItem("Listar"));
 
         // Menú de Venta
@@ -58,22 +60,32 @@ public class VentanaPrincipalEmpleado extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Acción a realizar cuando se selecciona el ítem del menú
-                JOptionPane.showMessageDialog(VentanaPrincipalEmpleado.this, "Seleccionaste: " + name);
+                // JOptionPane.showMessageDialog(VentanaPrincipalEmpleado.this, "Seleccionaste:
+                // " + name);
+
+                switch (name) {
+                    case "Listar":
+                        VentanaListarSalas ventanaListarSalas = new VentanaListarSalas();
+                        ventanaListarSalas.mostrar();
+                        // Listar Salas
+                        break;
+                }
             }
         });
         return menuItem;
     }
 
     /*
-    
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new VentanaPrincipalEmpleado().setVisible(true);
-            }
-        });
-    }
+     * 
+     * public static void main(String[] args) {
+     * SwingUtilities.invokeLater(new Runnable() {
+     * 
+     * @Override
+     * public void run() {
+     * new VentanaPrincipalEmpleado().setVisible(true);
+     * }
+     * });
+     * }
      */
     public void mostrar() {
         setVisible(true);

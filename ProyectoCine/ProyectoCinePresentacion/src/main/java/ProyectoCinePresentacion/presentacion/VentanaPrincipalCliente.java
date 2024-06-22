@@ -41,7 +41,7 @@ public class VentanaPrincipalCliente extends JFrame {
 
         // Menú de Venta
         JMenu menuVenta = new JMenu("Venta");
-        menuVenta.add(createMenuItem("Crear Venta"));
+        menuVenta.add(createMenuItem("Comprar Boletos"));
 
         // Agregar los menús a la barra de menú
         menuBar.add(menuPelicula);

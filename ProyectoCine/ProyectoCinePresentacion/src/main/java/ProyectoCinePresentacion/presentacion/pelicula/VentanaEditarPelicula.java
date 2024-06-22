@@ -113,10 +113,10 @@ public class VentanaEditarPelicula extends JFrame {
 
         boolean exito = peliculaController.actualizarPelicula(peliculaEditada);
         if (exito) {
-            JOptionPane.showMessageDialog(this, "Película eliminada exitosamente");
+            JOptionPane.showMessageDialog(this, "Película acualizada exitosamente");
             dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Error al eliminar la película. Verifique el ID.");
+            JOptionPane.showMessageDialog(this, "Error al actualizar la película.");
         }
 
         dispose();

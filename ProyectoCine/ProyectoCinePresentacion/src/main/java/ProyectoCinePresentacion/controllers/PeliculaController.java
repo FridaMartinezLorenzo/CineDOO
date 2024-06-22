@@ -35,12 +35,6 @@ public class PeliculaController {
             pelicula.setIdPelicula(-1);
             return false;
         } else {
-            // Puedes llamar a métodos de PeliculaDAO para buscar la película por título u otro criterio
-            if (peliculaDAO.BuscarPorTitulo(pelicula.getTitulo()) != null) {
-                // Si la película ya existe, entonces retornamos la película con un ID negativo
-                pelicula.setIdPelicula(-1);
-                return false;
-            }
             peliculaDAO.Actualizar(pelicula);
             return true;
         }

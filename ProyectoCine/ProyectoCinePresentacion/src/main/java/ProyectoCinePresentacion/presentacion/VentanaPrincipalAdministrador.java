@@ -91,7 +91,6 @@ public class VentanaPrincipalAdministrador extends JFrame {
         menuBar.add(menuPelicula);
         menuBar.add(menuGanancia);
         menuBar.add(menuHorario);
-        menuBar.add(menuPromocion);
         menuBar.add(menuSala);
         menuBar.add(menuUsuario);
         menuBar.add(menuVenta);

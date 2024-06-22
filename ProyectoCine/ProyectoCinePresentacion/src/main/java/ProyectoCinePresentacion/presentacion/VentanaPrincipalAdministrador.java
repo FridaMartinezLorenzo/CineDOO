@@ -16,6 +16,10 @@ import ProyectoCinePersistencia.entities.Categoria;
 import ProyectoCinePersistencia.entities.Rol;
 import ProyectoCinePersistencia.utils.MyBatisUtil;
 import ProyectoCinePresentacion.controllers.VentaController;
+import ProyectoCinePresentacion.presentacion.funcion.VentanaCrearFuncion;
+import ProyectoCinePresentacion.presentacion.funcion.VentanaEliminarFuncion;
+import ProyectoCinePresentacion.presentacion.funcion.VentanaFuncionesPorPelicula;
+import ProyectoCinePresentacion.presentacion.funcion.VentanaListarFunciones;
 import ProyectoCinePresentacion.presentacion.ganancias.VentanaObtenerGanancia;
 import ProyectoCinePresentacion.presentacion.horario.VentanaActualizarHorario;
 import ProyectoCinePresentacion.presentacion.horario.VentanaBuscarHorario;
@@ -57,6 +61,15 @@ public class VentanaPrincipalAdministrador extends JFrame {
         menuPelicula.add(createMenuItem("Actualizar Película"));
         menuPelicula.add(createMenuItem("Eliminar Película"));
 
+        // Menú de Función
+        JMenu menuFuncion = new JMenu("Función");
+        menuFuncion.add(createMenuItem("Crear Función"));
+        menuFuncion.add(createMenuItem("Listar Funciones"));
+        menuFuncion.add(createMenuItem("Buscar Función"));
+        menuFuncion.add(createMenuItem("Actualizar Función"));
+        menuFuncion.add(createMenuItem("Eliminar Función"));
+        menuFuncion.add(createMenuItem("Funciones por Película"));
+
         // Menú de Ganancia
         JMenu menuGanancia = new JMenu("Ganancia");
         menuGanancia.add(createMenuItem("Ver Ganancias"));
@@ -91,6 +104,7 @@ public class VentanaPrincipalAdministrador extends JFrame {
 
         // Agregar los menús a la barra de menú
         menuBar.add(menuPelicula);
+        menuBar.add(menuFuncion);
         menuBar.add(menuGanancia);
         menuBar.add(menuHorario);
         menuBar.add(menuSala);
@@ -141,6 +155,24 @@ public class VentanaPrincipalAdministrador extends JFrame {
                     case "Eliminar Película":
                         VentanaEliminarPelicula ventanaEliminarPelicula = new VentanaEliminarPelicula();
                         ventanaEliminarPelicula.mostrar();
+                        break;
+                    case "Crear Función":
+                        VentanaCrearFuncion ventanaCrearFuncion = new VentanaCrearFuncion();
+                        ventanaCrearFuncion.mostrar();
+                        break;
+                    case "Listar Funciones":
+                        VentanaListarFunciones ventanaListarFunciones = new VentanaListarFunciones();
+                        ventanaListarFunciones.mostrar();
+                        break;
+                    case "Eliminar Función":
+                        VentanaEliminarFuncion ventanaEliminarFuncion = new VentanaEliminarFuncion();
+                        ventanaEliminarFuncion.mostrar();
+                        // Eliminar Función
+                        break;
+                    case "Funciones por Película":
+                        VentanaFuncionesPorPelicula ventanaFuncionesPorPelicula = new VentanaFuncionesPorPelicula();
+                        ventanaFuncionesPorPelicula.mostrar();
+                        // Funciones por Película
                         break;
                     case "Ver Ganancias":
                         VentanaObtenerGanancia ventanaObtenerGanancia = new VentanaObtenerGanancia();

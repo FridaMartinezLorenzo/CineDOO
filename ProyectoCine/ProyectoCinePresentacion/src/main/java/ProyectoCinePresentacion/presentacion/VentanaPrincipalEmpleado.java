@@ -1,9 +1,21 @@
 package ProyectoCinePresentacion.presentacion;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+import ProyectoCinePersistencia.dao.categoria.CategoriaDAOImpl;
+import ProyectoCinePersistencia.entities.Categoria;
+import ProyectoCinePersistencia.utils.MyBatisUtil;
+import ProyectoCinePresentacion.presentacion.pelicula.VentanaListarPeliculas;
+import ProyectoCinePresentacion.presentacion.pelicula.VentanaSeleccionarPelicula;
+import ProyectoCinePresentacion.presentacion.venta.VentanaCrearVenta;
 
 public class VentanaPrincipalEmpleado extends JFrame {
 
@@ -19,33 +31,15 @@ public class VentanaPrincipalEmpleado extends JFrame {
 
         // Menú de Película
         JMenu menuPelicula = new JMenu("Película");
-        menuPelicula.add(createMenuItem("Buscar"));
-        menuPelicula.add(createMenuItem("Listar"));
-
-        // Menú de Horario
-        JMenu menuHorario = new JMenu("Horario");
-        menuHorario.add(createMenuItem("Buscar"));
-        menuHorario.add(createMenuItem("Listar"));
-
-        // Menú de Promoción
-        JMenu menuPromocion = new JMenu("Promoción");
-        menuPromocion.add(createMenuItem("Buscar"));
-        menuPromocion.add(createMenuItem("Listar"));
-
-        // Menú de Sala
-        JMenu menuSala = new JMenu("Sala");
-        menuSala.add(createMenuItem("Buscar"));
-        menuSala.add(createMenuItem("Listar"));
+        menuPelicula.add(createMenuItem("Buscar Película"));
+        menuPelicula.add(createMenuItem("Listar Películas"));
 
         // Menú de Venta
         JMenu menuVenta = new JMenu("Venta");
-        menuVenta.add(createMenuItem("Crear"));
+        menuVenta.add(createMenuItem("Crear Venta"));
 
         // Agregar los menús a la barra de menú
         menuBar.add(menuPelicula);
-        menuBar.add(menuHorario);
-        menuBar.add(menuPromocion);
-        menuBar.add(menuSala);
         menuBar.add(menuVenta);
 
         // Establecer la barra de menú en el JFrame
@@ -58,8 +52,34 @@ public class VentanaPrincipalEmpleado extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Acción a realizar cuando se selecciona el ítem del menú
-                JOptionPane.showMessageDialog(VentanaPrincipalEmpleado.this, "Seleccionaste: " + name);
+                // JOptionPane.showMessageDialog(VentanaPrincipalAdministrador.this, "Seleccionaste: " + name);
+
+                // Hacemos el precargado de los datos que podrían ser necesarios
+                CategoriaDAOImpl categoriaDAO = new CategoriaDAOImpl(MyBatisUtil.getSqlSessionFactory());
+                List<Categoria> categorias = categoriaDAO.Listar();
+                List<String> nombresCategorias = categorias.stream()
+                        .map(Categoria::getNombre)
+                        .collect(Collectors.toList());
+
+                switch (name) {
+                    case "Listar Películas":
+                        VentanaListarPeliculas ventanaListarPeliculas = new VentanaListarPeliculas();
+                        ventanaListarPeliculas.mostrar();
+                        break;
+                    case "Buscar Película":
+                        VentanaSeleccionarPelicula ventanaSeleccionarPeliculaBuscar = new VentanaSeleccionarPelicula("buscar");
+                        ventanaSeleccionarPeliculaBuscar.mostrar();
+                        break;
+                    case "Crear Venta":
+                        VentanaCrearVenta ventanaCrearVenta = new VentanaCrearVenta();
+                        ventanaCrearVenta.mostrar();
+                        break;
+
+                    default:
+                        break;
+                }
             }
+
         });
         return menuItem;
     }

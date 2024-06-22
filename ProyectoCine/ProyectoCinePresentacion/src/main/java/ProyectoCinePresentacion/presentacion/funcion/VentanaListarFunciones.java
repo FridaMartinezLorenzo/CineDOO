@@ -92,10 +92,4 @@ public class VentanaListarFunciones extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            VentanaListarFunciones ventana = new VentanaListarFunciones();
-            ventana.mostrar();
-        });
-    }
 }

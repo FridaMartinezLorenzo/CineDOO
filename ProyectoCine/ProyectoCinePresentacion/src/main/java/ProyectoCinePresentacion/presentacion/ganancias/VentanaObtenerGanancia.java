@@ -1,17 +1,35 @@
 package ProyectoCinePresentacion.presentacion.ganancias;
 
-import ProyectoCinePresentacion.controllers.GananciaController;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import ProyectoCinePersistencia.entities.Pelicula;
+import ProyectoCinePresentacion.controllers.GananciaController;
+import ProyectoCinePresentacion.controllers.PeliculaController;
 
 public class VentanaObtenerGanancia extends JFrame {
 
     private GananciaController gananciaController;
+    private PeliculaController peliculaController;
+    private JComboBox<String> peliculaComboBox;
+    private List<Pelicula> peliculas;
 
     public VentanaObtenerGanancia() {
         gananciaController = new GananciaController();
+        peliculaController = new PeliculaController();
         initComponents();
     }
 
@@ -32,17 +50,21 @@ public class VentanaObtenerGanancia extends JFrame {
         gbc.insets = new Insets(5, 5, 5, 5);
         mainPanel.add(inputPanel, BorderLayout.CENTER);
 
-        // Campo de ID de la Película
+        // Campo de selección de la Película
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.EAST;
-        inputPanel.add(new JLabel("ID Película:"), gbc);
+        inputPanel.add(new JLabel("Película:"), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
-        JTextField idPeliculaField = new JTextField(10);
-        inputPanel.add(idPeliculaField, gbc);
+        peliculas = peliculaController.listarPeliculas();
+        peliculaComboBox = new JComboBox<>();
+        for (Pelicula pelicula : peliculas) {
+            peliculaComboBox.addItem(pelicula.getTitulo());
+        }
+        inputPanel.add(peliculaComboBox, gbc);
 
         // Botón para obtener la ganancia
         gbc.gridx = 1;
@@ -64,13 +86,16 @@ public class VentanaObtenerGanancia extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int idPelicula = Integer.parseInt(idPeliculaField.getText());
-                    double ganancia = gananciaController.obtenerGanancias(idPelicula);
-                    resultLabel.setText("La ganancia de la película es: " + ganancia);
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(VentanaObtenerGanancia.this, "Por favor ingrese un ID de película válido.");
+                    int selectedIndex = peliculaComboBox.getSelectedIndex();
+                    if (selectedIndex != -1) {
+                        int idPelicula = peliculas.get(selectedIndex).getIdPelicula();
+                        double ganancia = gananciaController.obtenerGanancias(idPelicula);
+                        resultLabel.setText("La ganancia de la película es: " + ganancia);
+                    } else {
+                        JOptionPane.showMessageDialog(VentanaObtenerGanancia.this, "Seleccione una película.");
+                    }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(VentanaObtenerGanancia.this, "Error al obtener la ganancia.");
+                    JOptionPane.showMessageDialog(VentanaObtenerGanancia.this, "No hay ganancias aún de esta pelicula.");
                 }
             }
         });
@@ -79,5 +104,4 @@ public class VentanaObtenerGanancia extends JFrame {
     public void mostrar() {
         setVisible(true);
     }
-
 }

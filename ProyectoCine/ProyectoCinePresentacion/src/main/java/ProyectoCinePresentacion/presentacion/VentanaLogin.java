@@ -86,6 +86,9 @@ public class VentanaLogin extends JFrame {
                     } else if (usuario.getIdRol() == 2) {
                         VentanaPrincipalEmpleado ventanaPrincipalEmpleado = new VentanaPrincipalEmpleado();
                         ventanaPrincipalEmpleado.mostrar();
+                    } else if (usuario.getIdRol() == 3) {
+                        VentanaPrincipalCliente ventanaPrincipalCliente = new VentanaPrincipalCliente();
+                        ventanaPrincipalCliente.mostrar();
                     }
                     setVisible(false);
                 } else {

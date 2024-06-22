@@ -13,16 +13,16 @@ import javax.swing.JMenuItem;
 import ProyectoCinePersistencia.dao.categoria.CategoriaDAOImpl;
 import ProyectoCinePersistencia.entities.Categoria;
 import ProyectoCinePersistencia.utils.MyBatisUtil;
+import ProyectoCinePresentacion.presentacion.funcion.VentanaFuncionesPorPelicula;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaListarPeliculas;
 import ProyectoCinePresentacion.presentacion.pelicula.VentanaSeleccionarPelicula;
-import ProyectoCinePresentacion.presentacion.funcion.VentanaFuncionesPorPelicula;
 import ProyectoCinePresentacion.presentacion.venta.VentanaCrearVenta;
 
-public class VentanaPrincipalEmpleado extends JFrame {
+public class VentanaPrincipalCliente extends JFrame {
 
-    public VentanaPrincipalEmpleado() {
+    public VentanaPrincipalCliente() {
         // Configuración del JFrame
-        setTitle("Empleado - Cine");
+        setTitle("Cliente - Cine");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
